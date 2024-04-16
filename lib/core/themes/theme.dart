@@ -50,4 +50,12 @@ ThemeData pureLifeTheme = ThemeData(
             const MaterialStatePropertyAll(PureLifeColors.onPrimary),
         backgroundColor: const MaterialStatePropertyAll(PureLifeColors.primary),
       ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
+          borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
+          borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
     ));

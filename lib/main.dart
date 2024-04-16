@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:pure_life/features/auth/viewModels/forgot_pwd_screen_viewModel.dart';
 import 'package:pure_life/features/auth/viewModels/login_screen_viewModel.dart';
 import 'package:pure_life/features/auth/viewModels/signup_screen.dart';
+import 'package:pure_life/features/dashboard/viewModels/dashboard_screen_viewModel.dart';
 
 void main() {
   runApp(const PureLifeApp());
@@ -21,6 +22,7 @@ class PureLifeApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LoginScreenViewModel()),
         ChangeNotifierProvider(create: (context) => SignupScreenViewModel()),
+        ChangeNotifierProvider(create: (context) => DashboardViewModel()),
         ChangeNotifierProvider(
             create: (context) => ForgotPasswordScreenViewModel())
       ],

@@ -217,4 +217,5 @@ abstract final class Strings {
   static const yourPersonalDataWillBeUsed =
       "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.";
   static const payNow = "Pay Now";
+  static const home = "Home";
 }

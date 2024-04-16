@@ -14,4 +14,5 @@ abstract final class PureLifeColors {
   static const Color green = Color(0xFF00CD52);
   static const Color paleRed = Color(0xFFFFF2F4);
   static const Color black = Color(0xFF000000);
+  static const Color textFieldFill = Color(0xFFFEFEFE);
 }

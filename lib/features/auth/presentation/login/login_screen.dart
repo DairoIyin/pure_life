@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () =>
                         AppNavigator.push(context, AppRoutes.forgotPswdScreen),
-                    child: Text(
+                    child: const Text(
                       Strings.forgotPassword,
                     ),
                   ),
@@ -70,12 +70,22 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {}, child: Text(Strings.signIn))),
+                        onPressed: () {
+                          AppNavigator.pushReplacement(context,
+                              routeName: AppRoutes.dashboardScreen);
+                        },
+                        child: const Text(Strings.signIn))),
                 SizedBox(height: 16.h),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        side: const BorderSide(
+                            color: PureLifeColors.lightGrey, width: 2.0),
+                        backgroundColor: PureLifeColors.onPrimary,
+                        foregroundColor: PureLifeColors.primaryText),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -86,12 +96,6 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(width: 16.w),
                           Text(Strings.signUpWithGoogle)
                         ]),
-                    style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        side: BorderSide(
-                            color: PureLifeColors.lightGrey, width: 2.0),
-                        backgroundColor: PureLifeColors.onPrimary,
-                        foregroundColor: PureLifeColors.primaryText),
                   ),
                 )
               ],
