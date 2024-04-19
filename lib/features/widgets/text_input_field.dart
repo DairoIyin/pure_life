@@ -3,15 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pure_life/core/themes/themes.dart';
 
 class TextInputField extends StatelessWidget {
-  const TextInputField(
+  TextInputField(
       {super.key,
       required this.controller,
       required this.title,
-      this.bottomIsPadded = true});
+      this.bottomIsPadded = true,
+      this.validator,
+      this.errorString = ''});
   final TextEditingController controller;
   final String title;
-
+  String? Function(String?)? validator;
   final bool bottomIsPadded;
+  String? errorString;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +25,7 @@ class TextInputField extends StatelessWidget {
           style: context.textTheme.labelMedium,
         ),
         SizedBox(height: 11.84.h),
-        TextField(
+        TextFormField(
           controller: controller,
           style: context.textTheme.labelMedium
               ?.copyWith(fontSize: 11.sp, color: PureLifeColors.secondaryText),
@@ -30,6 +33,9 @@ class TextInputField extends StatelessWidget {
             filled: true,
             fillColor: PureLifeColors.onPrimary,
             contentPadding: EdgeInsets.symmetric(horizontal: 10.0.w),
+            errorText: errorString,
+            errorStyle: context.textTheme.labelMedium
+                ?.copyWith(fontSize: 11.sp, color: PureLifeColors.primary),
             enabledBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
@@ -38,11 +44,20 @@ class TextInputField extends StatelessWidget {
                 borderSide:
                     BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
                 borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
+            errorBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
+                borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
+                borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
           ),
           cursorHeight: 18.h,
           cursorColor: PureLifeColors.lightGrey,
+          validator: validator,
         ),
-        bottomIsPadded ? SizedBox(height: 16.16.h) : SizedBox.shrink()
+        // bottomIsPadded ? SizedBox(height: 16.16.h) : SizedBox.shrink()
       ],
     );
   }

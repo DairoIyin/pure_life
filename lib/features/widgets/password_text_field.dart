@@ -5,14 +5,19 @@ import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/utils/icons.dart';
 
 class PasswordTextField extends StatefulWidget {
-  const PasswordTextField(
-      {super.key,
-      required this.controller,
-      required this.title,
-      this.bottomIsPadded = true});
+  PasswordTextField({
+    super.key,
+    required this.controller,
+    required this.title,
+    this.bottomIsPadded = true,
+    this.errorText = '',
+    this.validator,
+  });
   final TextEditingController controller;
   final String title;
   final bool bottomIsPadded;
+  String? errorText;
+  String? Function(String?)? validator;
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -37,7 +42,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           style: context.textTheme.labelMedium,
         ),
         SizedBox(height: 11.84.h),
-        TextField(
+        TextFormField(
           controller: widget.controller,
           style: context.textTheme.labelMedium
               ?.copyWith(fontSize: 11.sp, color: PureLifeColors.secondaryText),
@@ -45,11 +50,22 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               filled: true,
               fillColor: PureLifeColors.onPrimary,
               contentPadding: EdgeInsets.symmetric(horizontal: 10.0.w),
+              errorText: widget.errorText,
+              errorStyle: context.textTheme.labelMedium
+                  ?.copyWith(fontSize: 11.sp, color: PureLifeColors.primary),
               enabledBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
                   borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
               focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
+                  borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
+              errorBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
+                  borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
+              focusedErrorBorder: OutlineInputBorder(
                   borderSide:
                       BorderSide(width: 1.w, color: PureLifeColors.lightGrey),
                   borderRadius: BorderRadius.all(Radius.circular(6.65.r))),
@@ -60,15 +76,15 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   height: 24.h,
                   alignment: Alignment.center,
                   child: SvgPicture.asset(
-                    _isObscured ? AppIcons.eye_off : AppIcons.eye_on,
-                  ),
+                      _isObscured ? AppIcons.eye_on : AppIcons.eye_off),
                 ),
               )),
           cursorHeight: 18.h,
           obscureText: _isObscured,
           cursorColor: PureLifeColors.lightGrey,
+          validator: widget.validator,
         ),
-        widget.bottomIsPadded ? SizedBox(height: 16.16.h) : SizedBox.shrink()
+        // widget.bottomIsPadded ? SizedBox(height: 16.16.h) : SizedBox.shrink()
       ],
     );
   }

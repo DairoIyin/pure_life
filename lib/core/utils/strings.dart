@@ -6,7 +6,7 @@ abstract final class Strings {
   static const bookALabTest = "Book a lab test";
   static const getVaccination = "Get Vaccination";
   static const consultDoctor = "Consult Doctor";
-  static const uploadPrescription = "Upload Prescription";
+  static const uploadPrescription = "Upload \nPrescription";
   static const shopCategory = "Shop Category";
   static const shopHealth = "Shop Health";
   static const shopSkincare = "Shop Skincare";
@@ -83,9 +83,9 @@ abstract final class Strings {
   static const prescribersEmailAddress = "Prescriber’s Email Address";
   static const uploadImage = "Upload Image (jpeg, png format)";
   static const yourOneStopForWellnessAndLifestyle =
-      "Your one-stop for wellness and lifestyle";
+      "Your one-stop \nfor wellness and \nlifestyle";
   static const shopScheduleVaccinationAppointments =
-      "Shop, schedule vaccination appointments, and access top-notch medical services from anywhere in Nigeria with ease.";
+      "Shop, schedule vaccination appointments, \nand access top-notch medical services \nfrom anywhere in Nigeria with ease.";
   static const createAccount = "Create Account";
   static const signIn = "Sign in";
   static const login = "Login";

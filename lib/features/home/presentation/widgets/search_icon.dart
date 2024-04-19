@@ -5,8 +5,8 @@ import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/utils/utils.dart';
 
-class SearchIcon extends StatelessWidget {
-  const SearchIcon({super.key});
+class PureLifeSearchBar extends StatelessWidget {
+  const PureLifeSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {

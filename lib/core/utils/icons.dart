@@ -12,4 +12,10 @@ abstract final class AppIcons {
   static const home_health = "assets/icons/home_health.svg";
   static const person = "assets/icons/person.svg";
   static const search = "assets/icons/search.svg";
+  static const pill = "assets/icons/pill.svg";
+  static const lab_test = "assets/icons/lab_test.svg";
+  static const stethoscope = "assets/icons/stethoscope.svg";
+  static const upload_prescription = "assets/icons/upload_prescription.svg";
+  static const volunteer_activism = "assets/icons/volunteer_activism.svg";
+
 }

@@ -8,6 +8,14 @@ class SignupScreenViewModel extends DisposableChangeNotifier{
   final TextEditingController email = TextEditingController();
   final TextEditingController passWord = TextEditingController();
   final TextEditingController confirmPassWord = TextEditingController();
+
+  final fbKey = GlobalKey<FormState>();
+
+  String? fNameErrorText = '';
+  String? lNameErrorText = '';
+  String? emailErrorText = '';
+  String? pswdErrorText = '';
+  String? confirmPswdErrorText = '';
   @override
   void disposeValues() {
     // TODO: implement disposeValues

@@ -32,7 +32,7 @@ class PureLifeBottomNavBar extends StatelessWidget {
             color: PureLifeColors.navbarGrey,
             borderRadius: ContainerProperties.defaultBorderRadius),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
               items.length,
               (index) => PureLifeBottomNavTile(

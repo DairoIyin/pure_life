@@ -5,6 +5,7 @@ import 'package:pure_life/features/auth/presentation/onboarding/views/onboarding
 import 'package:pure_life/features/auth/presentation/signUp/signup_screen.dart';
 import 'package:pure_life/features/cart/presentation/cart_screen.dart';
 import 'package:pure_life/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:pure_life/features/drug_refill/presentation/drug_refill_screen.dart';
 import 'package:pure_life/features/home/presentation/home_screen.dart';
 import 'package:pure_life/features/profile/presentation/profile_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order.dart';
@@ -35,22 +36,24 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CartScreen());
       case AppRoutes.profileScreen:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
-
+      case AppRoutes.drugRefill:
+        return MaterialPageRoute(builder: (_) => DrugRefillScreen());
       default:
         return MaterialPageRoute(builder: (_) => LoginScreen());
     }
   }
 }
 
-class AppRoutes{
-  static const onboardingScreen='/';
-  static const loginScreen='/login';
-  static const signUpScreen='/signUp';
-  static const forgotPswdScreen='/forgotPassword';
-  static const dashboardScreen='/dashboard';
-  static const homeScreen='/home';
-  static const shopAndOrderScreen='/shopAndOrder';
-  static const telehealthScreen='/telehealth';
-  static const cartScreen='/cart';
-  static const profileScreen='/profile';
+class AppRoutes {
+  static const onboardingScreen = '/';
+  static const loginScreen = '/login';
+  static const signUpScreen = '/signUp';
+  static const forgotPswdScreen = '/forgotPassword';
+  static const dashboardScreen = '/dashboard';
+  static const homeScreen = '/home';
+  static const shopAndOrderScreen = '/shopAndOrder';
+  static const telehealthScreen = '/telehealth';
+  static const cartScreen = '/cart';
+  static const profileScreen = '/profile';
+  static const drugRefill = '/drugRefill';
 }

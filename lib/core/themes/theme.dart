@@ -15,7 +15,7 @@ ThemeData pureLifeTheme = ThemeData(
       bodySmall: TextStyle(
           fontFamily: 'BricolageGrotesque',
           fontSize: 12.0.sp,
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
           color: PureLifeColors.primaryText),
       bodyLarge: TextStyle(
           fontFamily: 'BricolageGrotesque',
@@ -41,7 +41,7 @@ ThemeData pureLifeTheme = ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 0.0,
-        fixedSize: const Size.fromHeight(56.0),
+       
         shape: const RoundedRectangleBorder(
           borderRadius: ContainerProperties.defaultButtonBorderRadius,
         ),
