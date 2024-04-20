@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
 import 'package:pure_life/core/utils/utils.dart';
@@ -91,7 +93,9 @@ class TelehealthContainer extends StatelessWidget {
               children: [
                 CircleMenu(
                   icon: AppIcons.pill,
-                  onTap: () {},
+                  onTap: () {
+                    context.goNamed(AppPaths.drugRefillName);
+                  },
                   title: Strings.drugRefill,
                 ),
                 CircleMenu(

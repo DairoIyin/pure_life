@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
@@ -20,8 +21,15 @@ class PureLifeBottomNavItem extends StatelessWidget {
 }
 
 class PureLifeBottomNavBar extends StatelessWidget {
-  const PureLifeBottomNavBar({super.key, required this.items});
+  PureLifeBottomNavBar(
+      {super.key, required this.items, required this.navShell});
   final List<PureLifeBottomNavItem> items;
+  final StatefulNavigationShell navShell;
+
+  void _goToBranch(int index) {
+    navShell.goBranch(index, initialLocation: index == navShell.currentIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardViewModel>(builder: (context, value, child) {
@@ -38,10 +46,11 @@ class PureLifeBottomNavBar extends StatelessWidget {
               (index) => PureLifeBottomNavTile(
                     icon: items[index].icon,
                     title: items[index].title,
-                    isSelected: value.index == index,
+                    isSelected: value.selectedIndex == index,
                     onTap: () {
                       HapticFeedback.lightImpact();
                       value.onTap(index);
+                      _goToBranch(value.selectedIndex);
                     },
                   )),
         ),

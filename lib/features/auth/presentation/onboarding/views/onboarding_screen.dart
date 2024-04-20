@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/icons.dart';
 import 'package:pure_life/core/utils/images.dart';
@@ -99,8 +100,7 @@ class OnboardingScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 46.0,
                       child: PureLifeButton(
-                          onPressed: () => AppNavigator.push(
-                              context, AppRoutes.signUpScreen),
+                          onPressed: () => context.goNamed(AppPaths.signUpScreenName),
                           title: Strings.createAccount),
                     ),
                   ),
@@ -109,8 +109,7 @@ class OnboardingScreen extends StatelessWidget {
                     child: SizedBox(
                       height: 46.0.h,
                       child: ElevatedButton(
-                        onPressed: () =>
-                            AppNavigator.push(context, AppRoutes.loginScreen),
+                        onPressed: () => context.goNamed(AppPaths.loginScreenName),
                         child: Text(Strings.signIn),
                         style: ElevatedButton.styleFrom(
                             elevation: 0,

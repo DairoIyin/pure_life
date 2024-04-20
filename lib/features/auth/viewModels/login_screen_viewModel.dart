@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/disposable_change_notifier.dart';
 import 'package:email_validator/email_validator.dart';
@@ -13,13 +14,12 @@ class LoginScreenViewModel extends DisposableChangeNotifier {
   String? emailErrorText = '';
   String? pswdErrorText = '';
 
-
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       emailErrorText = 'Please enter an email address';
       notifyListeners();
     }
-     if (!EmailValidator.validate(value!)) {
+    if (!EmailValidator.validate(value!)) {
       emailErrorText = 'Enter a valid email address';
       notifyListeners();
     } else {
@@ -38,8 +38,8 @@ class LoginScreenViewModel extends DisposableChangeNotifier {
 
   void submitForm(BuildContext context) {
     if (fbKey.currentState!.validate()) {
-      print(fbKey.currentState!.validate());
-      AppNavigator.push(context, AppRoutes.dashboardScreen);
+    
+      context.goNamed(AppPaths.homeScreenName);
       notifyListeners();
     }
   }

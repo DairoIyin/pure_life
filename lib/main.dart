@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:pure_life/core/routes/app_navigator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/features/auth/viewModels/forgot_pwd_screen_viewModel.dart';
@@ -34,12 +35,12 @@ class PureLifeApp extends StatelessWidget {
           designSize: const Size(375, 812),
           minTextAdapt: true,
           builder: (_, child) {
-            return MaterialApp(
+            return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: pureLifeTheme,
-              initialRoute: AppRoutes.onboardingScreen,
-              onGenerateRoute: RouteGenerator.generateRoute,
+            routerConfig: AppNavigation.router,
+             
             );
           }),
     );

@@ -2,8 +2,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/utils.dart';
@@ -106,8 +107,7 @@ class SignupScreen extends StatelessWidget {
                     PureLifeButton(
                         onPressed: () {
                           if (value.fbKey.currentState!.validate()) {
-                            AppNavigator.popAllPush(
-                                context, AppRoutes.dashboardScreen);
+                            context.goNamed(AppPaths.homeScreenName);
                           }
                         },
                         title: Strings.createAccount),

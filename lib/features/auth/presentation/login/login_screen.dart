@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/themes/theme_extension.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
@@ -81,8 +82,7 @@ class LoginScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () => AppNavigator.push(
-                            context, AppRoutes.forgotPswdScreen),
+                        onTap: () => context.goNamed(AppPaths.forgotPswdScreenName),
                         child: const Text(
                           Strings.forgotPassword,
                         ),
@@ -92,8 +92,8 @@ class LoginScreen extends StatelessWidget {
                     PureLifeButton(
                         onPressed: () {
                           if (model.fbKey.currentState!.validate()) {
-                            AppNavigator.popAllPush(
-                                context, AppRoutes.dashboardScreen);
+                            context.goNamed(AppPaths.homeScreenName);
+                           
                           }
                         },
                         title: Strings.signIn),

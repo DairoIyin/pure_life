@@ -17,5 +17,10 @@ abstract final class AppIcons {
   static const stethoscope = "assets/icons/stethoscope.svg";
   static const upload_prescription = "assets/icons/upload_prescription.svg";
   static const volunteer_activism = "assets/icons/volunteer_activism.svg";
+  static const info = "assets/icons/‌info.svg";
+  static const arrow_forward = "assets/icons/arrow_forward.svg";
+  static const add = "assets/icons/add.svg";
+  static const close = "assets/icons/close.svg";
+  static const arrow_downward = "assets/icons/arrow_downward.svg";
 
 }
