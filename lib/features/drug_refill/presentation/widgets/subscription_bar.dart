@@ -99,11 +99,10 @@ class _SubscriptionBarState extends State<SubscriptionBar> {
                 SizedBox(
                   height: 18.h,
                 ),
-                Expanded(
-                    child: PureLifeButton(
+                PureLifeButton(
                   onPressed: () {},
                   title: Strings.subscribe,
-                ))
+                )
               ],
             ),
           )

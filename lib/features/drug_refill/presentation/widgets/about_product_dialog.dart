@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/path_names.dart';
+
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
-import 'package:pure_life/features/widgets/pure_life_button.dart';
+import 'package:pure_life/features/widgets/counter.dart';
+
+import 'package:pure_life/features/widgets/widgets.dart';
 
 Future<void> showAboutProductDialog(BuildContext context) async {
   await showDialog(
@@ -37,16 +40,7 @@ class _AboutProductDialog extends StatelessWidget {
                   Strings.aboutTheProduct,
                   style: context.textTheme.labelLarge,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop;
-                  },
-                  child: SvgPicture.asset(
-                    AppIcons.close,
-                    width: 10.w,
-                    height: 10.h,
-                  ),
-                )
+                CircleCloseButon()
               ],
             ),
             SizedBox(height: 24.h),
@@ -63,43 +57,20 @@ class _AboutProductDialog extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-          
                 Text(
                   Strings.quantity,
                   style: context.textTheme.bodyMedium
                       ?.copyWith(fontWeight: FontWeight.w500),
                 ),
-                Container(
-                    width: 51.w,
-                    height: 39.h,
-                    padding: EdgeInsets.all(10.56),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(2.5.r)),
-                        color: PureLifeColors.paleRed),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                            child: Text(
-                          '-',
-                          style: TextStyle(fontSize: 10.72.sp),
-                        )),
-                        Text(
-                          '1',
-                          style: TextStyle(fontSize: 10.72.sp),
-                        ),
-                        InkWell(
-                            child: Text(
-                          '+',
-                          style: TextStyle(fontSize: 10.72.sp),
-                        )),
-                      ],
-                    )),
+                Counter(quantity: 1)
               ],
             ),
             SizedBox(height: 35.h),
             PureLifeButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+                context.goNamed(AppPaths.cartScreenName);
+              },
               title: Strings.add,
             )
           ],

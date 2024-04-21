@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
+import 'package:pure_life/features/widgets/circle_close_btn.dart';
 
 class PillSummary extends StatelessWidget {
   const PillSummary({super.key});
@@ -19,25 +20,7 @@ class PillSummary extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.all(5.59.h),
-              width: 24.w,
-              height: 24.h,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: PureLifeColors.onPrimary),
-              child: Container(
-                  width: 6.75.w,
-                  height: 6.75.h,
-                  alignment: Alignment.center,
-                  child: SvgPicture.asset(
-                    AppIcons.close,
-                    width: 6.75.w,
-                    height: 6.75.h,
-                  )),
-            ),
-          ),
+        CircleCloseButon(),
           SizedBox(width: 24.w),
           SvgPicture.asset(
             AppIcons.pill,

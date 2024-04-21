@@ -6,7 +6,8 @@ import 'package:pure_life/core/themes/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/features/auth/viewModels/forgot_pwd_screen_viewModel.dart';
 import 'package:pure_life/features/auth/viewModels/login_screen_viewModel.dart';
-import 'package:pure_life/features/auth/viewModels/signup_screen.dart';
+import 'package:pure_life/features/auth/viewModels/signup_screen_view_model.dart';
+import 'package:pure_life/features/cart/viewmodel/cart_screen_view_model.dart';
 import 'package:pure_life/features/dashboard/viewModels/dashboard_screen_viewModel.dart';
 import 'package:pure_life/features/drug_refill/viewmodel/drug_refill_viewmodel.dart';
 import 'package:pure_life/features/home/viewmodel/home_screen_view_model.dart';
@@ -28,6 +29,7 @@ class PureLifeApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DashboardViewModel()),
         ChangeNotifierProvider(create: (context) => HomeScreenViewModel()),
         ChangeNotifierProvider(create: (context) => DrugRefillViewModel()),
+        ChangeNotifierProvider(create: (context) => CartScreenViewModel()),
         ChangeNotifierProvider(
             create: (context) => ForgotPasswordScreenViewModel())
       ],

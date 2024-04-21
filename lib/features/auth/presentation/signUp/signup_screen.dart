@@ -9,7 +9,7 @@ import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/auth/presentation/widgets/onboarding_header.dart';
-import 'package:pure_life/features/auth/viewModels/signup_screen.dart';
+import 'package:pure_life/features/auth/viewModels/signup_screen_view_model.dart';
 import 'package:pure_life/features/widgets/password_text_field.dart';
 import 'package:pure_life/features/widgets/pure_life_button.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
