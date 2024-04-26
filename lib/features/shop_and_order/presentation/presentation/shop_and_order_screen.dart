@@ -52,27 +52,31 @@ class ShopAndOrderScreen extends StatelessWidget {
                     title: product.title);
               }),
           Constants.largeVerticalGutter.verticalSpace,
-          SizedBox(
-            width: 79,
-            child: FittedBox(
-              child: NumberPaginator(
-                numberPages: value.noOfPages,
-                onPageChange: (index) => value.onPageChanged(index),
-                config: NumberPaginatorUIConfig(
-                  height: 35,
-   
-                  // default height is 48
-                  contentPadding: EdgeInsets.symmetric(horizontal: 2),
-                  buttonShape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              Expanded(
+                child: NumberPaginator(
+                  numberPages: value.noOfPages,
+                  onPageChange: (index) => value.onPageChanged(index),
+                  showNextButton: false,
+                  showPrevButton: false,
+                  config: const NumberPaginatorUIConfig(
+                    height: 25,
+
+                    // default height is 48
+                    contentPadding: EdgeInsets.zero,
+                    buttonPadding: EdgeInsets.zero,
+                    buttonSelectedForegroundColor: PureLifeColors.onPrimary,
+                    buttonUnselectedForegroundColor: PureLifeColors.primaryText,
+                    buttonUnselectedBackgroundColor: PureLifeColors.onPrimary,
+                    buttonSelectedBackgroundColor: PureLifeColors.primary,
                   ),
-                  buttonSelectedForegroundColor: PureLifeColors.onPrimary,
-                  buttonUnselectedForegroundColor: PureLifeColors.primaryText,
-                  buttonUnselectedBackgroundColor: PureLifeColors.onPrimary,
-                  buttonSelectedBackgroundColor: PureLifeColors.primary,
                 ),
               ),
-            ),
+              Spacer(),
+            ],
           )
         ],
       ));
