@@ -218,5 +218,24 @@ abstract final class Strings {
       "Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.";
   static const payNow = "Pay Now";
   static const home = "Home";
+  static const apartmentSuiteUnit = "Apartment, suite, unit etc (Optional)";
+  static const selectAnOption = "Select an option";
+  static const houseNumberAndStreetName = "House number and street name";
+  static const selectYourLocation = "Select your location and see the price";
   static const yourCart = "Your Cart";
+  static const searchShopHealth = "Search shop health";
+  static const filter = "Filter";
+  static const buyNow = "Buy Now";
+  static const filterBy = "Filter by";
+  static const price = "Price";
+  static const below1000 = "Below ₦1000";
+  static const between1kto = "Between ₦1000 - ₦2,999";
+  static const between3kto = "Between ₦3000 - ₦3,999";
+  static const between4kto = "Between ₦4000 - ₦4,999";
+  static const between5kto = "Between ₦5000 - ₦9,999";
+  static const between10kto = "Between ₦10,000 - Above";
+  static const okay = "Okay";
+  static const productDetails = "Product Details";
+  static const continueShopping = "Continue Shopping";
+  static const productAlreadyAddedToCart = "Product already added to cart";
 }

@@ -19,7 +19,7 @@ class CartItemTile extends StatelessWidget {
   final String title;
   final String description;
   final String weight;
-  final String amount;
+  final num amount;
   final int quantity;
   @override
   Widget build(BuildContext context) {
@@ -35,17 +35,22 @@ class CartItemTile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleCloseButon(),
+                CircleCloseButon(onTap: () {
+                  //Todo: implement removal from cart
+                  } ,),
                 SizedBox(width: 24.w),
-                Container(
-                  width: 38.49.w,
-                  height: 38.44.h,
-                  padding: EdgeInsets.all(10.56),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(2.5.r)),
-                      color: PureLifeColors.paleRed),
-                  child: SvgPicture.asset(AppIcons.pill,
-                      width: 16.w, height: 16.h),
+                AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: Container(
+                    // width: 38.49.w,
+                    // height: 38.49.h,
+                    padding: const EdgeInsets.all(10.56),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(2.5.r)),
+                        color: PureLifeColors.paleRed),
+                    child: SvgPicture.asset(AppIcons.pill,
+                        width: 16.w, height: 16.h),
+                  ),
                 ),
                 SizedBox(width: 16.w),
                 Expanded(

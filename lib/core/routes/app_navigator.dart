@@ -5,12 +5,16 @@ import 'package:pure_life/features/auth/presentation/forgotPassword/forgot_pswd_
 import 'package:pure_life/features/auth/presentation/login/login_screen.dart';
 import 'package:pure_life/features/auth/presentation/onboarding/views/onboarding_screen.dart';
 import 'package:pure_life/features/auth/presentation/signUp/signup_screen.dart';
+import 'package:pure_life/features/cart/presentation/billing_details_screen.dart';
+import 'package:pure_life/features/cart/presentation/billing_summary_screen.dart';
 import 'package:pure_life/features/cart/presentation/cart_screen.dart';
 import 'package:pure_life/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:pure_life/features/drug_refill/presentation/drug_refill_screen.dart';
 import 'package:pure_life/features/home/presentation/home_screen.dart';
 import 'package:pure_life/features/profile/presentation/profile_screen.dart';
-import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_skincare.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/supermarket.dart';
 import 'package:pure_life/features/telehealth/presentation/telehealth_screen.dart';
 
 class AppNavigation {
@@ -86,6 +90,16 @@ class AppNavigation {
                   builder: (context, state) => ShopAndOrderScreen(
                     key: state.pageKey,
                   ),
+                  routes: [
+                    GoRoute(path: AppPaths.shopSkincareScreenPath,
+                    name: AppPaths.shopSkincareScreenName,
+                    builder:(context, state) => ShopSkincareScreen(key: state.pageKey,),
+                    ),
+                    GoRoute(path: AppPaths.supermarketScreenPath,
+                    name: AppPaths.supermarketScreenName,
+                    builder:(context, state) => SupermarketScreen(key: state.pageKey,),
+                    )
+                  ]
                 )
               ]),
               StatefulShellBranch(navigatorKey: _rootNavTeleHealth, routes: [
@@ -99,12 +113,27 @@ class AppNavigation {
               ]),
               StatefulShellBranch(navigatorKey: _rootNavCart, routes: [
                 GoRoute(
-                  path: AppPaths.cartScreenPath,
-                  name: AppPaths.cartScreenName,
-                  builder: (context, state) => CartScreen(
-                    key: state.pageKey,
-                  ),
-                )
+                    path: AppPaths.cartScreenPath,
+                    name: AppPaths.cartScreenName,
+                    builder: (context, state) => CartScreen(
+                          key: state.pageKey,
+                        ),
+                    routes: [
+                      GoRoute(
+                        path: AppPaths.billingDetailsPath,
+                        name: AppPaths.billingDetailsName,
+                        builder: (context, state) => BillingDetailsScreen(
+                          key: state.pageKey,
+                        ),
+                      ),
+                      GoRoute(
+                        path: AppPaths.billingSummaryPath,
+                        name: AppPaths.billingSummaryName,
+                        builder: (context, state) => BillingSummaryScreen(
+                          key: state.pageKey,
+                        ),
+                      ),
+                    ])
               ]),
               StatefulShellBranch(navigatorKey: _rootNavProfile, routes: [
                 GoRoute(

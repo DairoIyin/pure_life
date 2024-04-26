@@ -40,17 +40,23 @@ class ShopCategory extends StatelessWidget {
               children: [
                 CircleMenu(
                   icon: AppIcons.home_health,
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(AppPaths.shopAndOrderScreenName);
+                  },
                   title: Strings.shopHealth,
                 ),
                 CircleMenu(
                   icon: AppIcons.volunteer_activism,
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(AppPaths.shopSkincareScreenName);
+                  },
                   title: Strings.shopSkincare,
                 ),
                 CircleMenu(
                   icon: AppIcons.shopping_cart,
-                  onTap: () {},
+                  onTap: () {
+                    context.pushNamed(AppPaths.supermarketScreenName);
+                  },
                   title: Strings.superMarket,
                 ),
               ],

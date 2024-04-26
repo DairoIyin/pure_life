@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pure_life/core/constants.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
@@ -8,9 +10,15 @@ import 'package:pure_life/features/widgets/pure_life_button.dart';
 
 class OrderSummaryContainer extends StatelessWidget {
   const OrderSummaryContainer(
-      {super.key, required this.amount, required this.deliveryFee});
-  final String amount;
-  final String deliveryFee;
+      {super.key,
+      required this.amount,
+      required this.deliveryFee,
+      required this.buttonTitle,
+      required this.action});
+  final num amount;
+  final num deliveryFee;
+  final String buttonTitle;
+  final VoidCallback action;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +106,7 @@ class OrderSummaryContainer extends StatelessWidget {
               context,
               title: Strings.total,
               subTitle: Text(
-                amount,
+                '$amount',
                 style: TextStyle(
                     fontSize: 9.9.sp,
                     fontWeight: FontWeight.w700,
@@ -108,7 +116,7 @@ class OrderSummaryContainer extends StatelessWidget {
               weightIsBold: false,
             ),
             Constants.largeVerticalGutter.verticalSpace,
-            PureLifeButton(onPressed: () {}, title: Strings.checkout)
+            PureLifeButton(onPressed: action, title: buttonTitle)
           ],
         ),
       ),

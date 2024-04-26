@@ -5,8 +5,8 @@ import 'package:pure_life/core/ui_utils/container_properties.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/features/home/presentation/widgets/add_to_cart_btn.dart';
 
-class ShopItem extends StatelessWidget {
-  const ShopItem(
+class ShopItemContainer extends StatelessWidget {
+  const ShopItemContainer(
       {super.key,
       required this.image,
       required this.amount,

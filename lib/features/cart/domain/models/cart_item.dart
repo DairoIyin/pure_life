@@ -8,7 +8,7 @@ class CartItem {
   String title;
   String description;
   String weight;
-  String amount;
+  num amount;
   int quantity;
 
  

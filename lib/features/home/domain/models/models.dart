@@ -1,2 +1,2 @@
 export 'promo_info.dart';
-export 'shop_item.dart';
+export '../../../../core/common_models/product.dart';

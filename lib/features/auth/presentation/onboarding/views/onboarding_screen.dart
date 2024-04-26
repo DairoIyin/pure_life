@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pure_life/core/routes/path_names.dart';
-import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/icons.dart';
 import 'package:pure_life/core/utils/images.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,12 +24,12 @@ class OnboardingScreen extends StatelessWidget {
         backgroundColor: PureLifeColors.onPrimary,
         body: SafeArea(
           child: ListView(
-            padding: EdgeInsets.fromLTRB(15.0, 42.0, 20.0, 61.0),
+            padding: EdgeInsets.fromLTRB(15.0.w, 42.0.h, 20.0.w, 61.0.h),
             children: [
               Align(
                   alignment: Alignment.topCenter,
                   child: Image(
-                    image: AssetImage(AppImages.pureLifeLogo),
+                    image: const AssetImage(AppImages.pureLifeLogo),
                     width: 144.w,
                     height: 67.5.h,
                   )),
@@ -46,7 +45,7 @@ class OnboardingScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.all(Radius.circular(9.92.r)),
-                          gradient: LinearGradient(
+                          gradient:const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
@@ -66,14 +65,14 @@ class OnboardingScreen extends StatelessWidget {
                   Positioned(
                       left: 70.72.w,
                       bottom: 63.93.h,
-                      child: _InfoItem(
+                      child:const _InfoItem(
                         icon: AppIcons.vaccination,
                         title: Strings.teleHealth,
                       )),
                   Positioned(
                       right: 70.47.w,
                       bottom: 16.31.h,
-                      child: _InfoItem(
+                      child:const _InfoItem(
                         icon: AppIcons.shopping_cart,
                         title: Strings.shopAndOrder,
                       ))
@@ -110,7 +109,7 @@ class OnboardingScreen extends StatelessWidget {
                       height: 46.0.h,
                       child: ElevatedButton(
                         onPressed: () => context.goNamed(AppPaths.loginScreenName),
-                        child: Text(Strings.signIn),
+                        child: const Text(Strings.signIn),
                         style: ElevatedButton.styleFrom(
                             elevation: 0,
                             side: BorderSide(

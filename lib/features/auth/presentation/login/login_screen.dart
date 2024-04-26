@@ -7,15 +7,10 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
-import 'package:pure_life/core/themes/theme_extension.dart';
-import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/icons.dart';
 import 'package:pure_life/core/utils/strings.dart';
 import 'package:pure_life/features/auth/presentation/widgets/onboarding_header.dart';
 import 'package:pure_life/features/auth/viewModels/login_screen_viewModel.dart';
-import 'package:pure_life/features/widgets/back_button.dart';
-import 'package:pure_life/features/widgets/password_text_field.dart';
-import 'package:pure_life/features/widgets/pure_life_button.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:pure_life/core/constants.dart';
+import 'package:pure_life/core/providers/product_provider.dart';
 import 'package:pure_life/core/themes/themes.dart';
 
 import 'package:pure_life/core/utils/utils.dart';
@@ -12,6 +14,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<ProductProvider>(context);
     return Consumer<HomeScreenViewModel>(builder: (context, value, child) {
       return SafeArea(
           child: ListView(
@@ -37,8 +40,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 49.78.h),
-          PureLifeSearchBar(),
+          Constants.largeVerticalGutter.verticalSpace,
+          PureLifeSearchBar(hintText: Strings.searchPureLife),
           SizedBox(height: 18.h),
           Carousel(),
           TelehealthContainer(),
@@ -55,36 +58,22 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           SizedBox(height: 24.h),
-          GridView(
+          GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
+              itemCount: 4,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 12.h,
                 crossAxisSpacing: 15.w,
               ),
-              children: [
-                ShopItem(
-                  title: value.shopItems[0].title,
-                  amount: value.shopItems[0].amount,
-                  image: value.shopItems[0].image,
-                ),
-                ShopItem(
-                  title: value.shopItems[1].title,
-                  amount: value.shopItems[1].amount,
-                  image: value.shopItems[1].image,
-                ),
-                ShopItem(
-                  title: value.shopItems[2].title,
-                  amount: value.shopItems[2].amount,
-                  image: value.shopItems[2].image,
-                ),
-                ShopItem(
-                  title: value.shopItems[3].title,
-                  amount: value.shopItems[3].amount,
-                  image: value.shopItems[3].image,
-                )
-              ])
+              itemBuilder: (context, index) {
+                var product = productProvider.productList[index];
+                return ShopItem(
+                    image: product.image,
+                    amount: product.price,
+                    title: product.title);
+              })
         ],
       ));
     });

@@ -1,7 +1,3 @@
-
-
-
-
 class AppPaths {
   static const onboardingScreenPath = '/onboarding';
   static const onboardingScreenName = 'onboarding';
@@ -17,6 +13,10 @@ class AppPaths {
   static const homeScreenName = 'home';
   static const shopAndOrderScreenPath = '/shopAndOrder';
   static const shopAndOrderScreenName = 'shopAndOrder';
+  static const shopSkincareScreenPath = 'shopSkincare';
+  static const shopSkincareScreenName = 'shopSkincare';
+  static const supermarketScreenPath = 'supermarket';
+  static const supermarketScreenName = 'supermarket';
   static const telehealthScreenPath = '/telehealth';
   static const telehealthScreenName = 'telehealth';
   static const cartScreenPath = '/cart';
@@ -25,4 +25,8 @@ class AppPaths {
   static const profileScreenName = 'profile';
   static const drugRefillPath = 'drugRefill';
   static const drugRefillName = 'drugRefill';
+  static const billingDetailsPath = 'billingDetails';
+  static const billingDetailsName = 'billingDetails';
+  static const billingSummaryPath = 'billingSummary';
+  static const billingSummaryName = 'billingSummary';
 }

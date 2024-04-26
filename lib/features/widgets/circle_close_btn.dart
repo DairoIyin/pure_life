@@ -6,14 +6,12 @@ import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/utils/utils.dart';
 
 class CircleCloseButon extends StatelessWidget {
-  const CircleCloseButon({super.key});
-
+  const CircleCloseButon({super.key,required this.onTap});
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context, rootNavigator: true).pop();
-      },
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(5.59.h),
         width: 24.w,

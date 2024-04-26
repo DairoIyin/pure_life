@@ -12,7 +12,7 @@ import 'package:pure_life/features/dashboard/presentation/widgets/bottom_nav_bar
 import 'package:pure_life/features/dashboard/viewModels/dashboard_screen_viewModel.dart';
 import 'package:pure_life/features/home/presentation/home_screen.dart';
 import 'package:pure_life/features/profile/presentation/profile_screen.dart';
-import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
 import 'package:pure_life/features/telehealth/presentation/telehealth_screen.dart';
 
 class DashboardScreen extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pure_life/core/providers/product_provider.dart';
 import 'package:pure_life/core/routes/app_navigator.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/theme.dart';
@@ -11,8 +12,12 @@ import 'package:pure_life/features/cart/viewmodel/cart_screen_view_model.dart';
 import 'package:pure_life/features/dashboard/viewModels/dashboard_screen_viewModel.dart';
 import 'package:pure_life/features/drug_refill/viewmodel/drug_refill_viewmodel.dart';
 import 'package:pure_life/features/home/viewmodel/home_screen_view_model.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
+import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
+import 'package:pure_life/injection.dart';
 
 void main() {
+  init();
   runApp(const PureLifeApp());
 }
 
@@ -30,6 +35,8 @@ class PureLifeApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => HomeScreenViewModel()),
         ChangeNotifierProvider(create: (context) => DrugRefillViewModel()),
         ChangeNotifierProvider(create: (context) => CartScreenViewModel()),
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(create: (context) => ShopScreenViewModel()),
         ChangeNotifierProvider(
             create: (context) => ForgotPasswordScreenViewModel())
       ],
@@ -41,8 +48,7 @@ class PureLifeApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: pureLifeTheme,
-            routerConfig: AppNavigation.router,
-             
+              routerConfig: AppNavigation.router,
             );
           }),
     );

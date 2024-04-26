@@ -22,5 +22,6 @@ abstract final class AppIcons {
   static const add = "assets/icons/add.svg";
   static const close = "assets/icons/close.svg";
   static const arrow_downward = "assets/icons/arrow_downward.svg";
-
+  static const edit = "assets/icons/edit.svg";
+  static const sort = "assets/icons/sort.svg";
 }

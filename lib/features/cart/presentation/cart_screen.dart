@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/constants.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/cart/presentation/widgets/cart_item_tile.dart';
@@ -38,9 +40,11 @@ class CartScreen extends StatelessWidget {
                     Constants.smallVerticalGutter.verticalSpace,
                 itemCount: value.cartItems.length),
             Constants.largeVerticalGutter.verticalSpace,
-            OrderSummaryContainer(
-              amount: '89,250.00',
-              deliveryFee: '0.00',
+             OrderSummaryContainer(
+              amount: 89250.00,
+              deliveryFee: 0.00,
+              buttonTitle: Strings.checkout,
+              action: (){context.goNamed(AppPaths.billingDetailsName);},
             )
           ],
         )),

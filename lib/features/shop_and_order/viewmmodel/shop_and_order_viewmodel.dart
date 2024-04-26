@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pure_life/core/utils/disposable_change_notifier.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/home/domain/models/models.dart';
 
-class HomeScreenViewModel extends DisposableChangeNotifier {
+class ShopScreenViewModel extends DisposableChangeNotifier {
+  int noOfPages = 4;
+  int currentPage = 0;
   final pageController = PageController(viewportFraction: 1);
   bool promoIsDisplayed = true;
+  void onPageChanged(int index) {
+    currentPage = index;
+    notifyListeners();
+  }
+
   List<PromoInfo> promos = [
     PromoInfo(
         image: AppImages.promo_img1,
@@ -19,29 +27,6 @@ class HomeScreenViewModel extends DisposableChangeNotifier {
         title: 'Get 50% Off \nCouples Lab Test',
         action: Strings.bookTest),
   ];
-
-  // List<Product> shopItems = [
-  //   Product(
-  //       id: 1,
-  //       price: '2,550.00',
-  //       image: AppImages.drug1,
-  //       title: 'Amino Pep 200ml'),
-  //   Product(
-  //       id: 1,
-  //       price: '2,550.00',
-  //       image: AppImages.drug2,
-  //       title: 'Amino Pep 200ml'),
-  //   Product(
-  //       id: 1,
-  //       price: '2,550.00',
-  //       image: AppImages.drug1,
-  //       title: 'Amino Pep 200ml'),
-  //   Product(
-  //       id: 1,
-  //       price: '2,550.00',
-  //       image: AppImages.drug2,
-  //       title: 'Amino Pep 200ml')
-  // ];
   @override
   void disposeValues() {
     // TODO: implement disposeValues
