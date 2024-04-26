@@ -224,6 +224,8 @@ abstract final class Strings {
   static const selectYourLocation = "Select your location and see the price";
   static const yourCart = "Your Cart";
   static const searchShopHealth = "Search shop health";
+  static const searchShopSkincare= "Search shop skincare";
+  static const searchShopSupermarket = "Search supermarket";
   static const filter = "Filter";
   static const buyNow = "Buy Now";
   static const filterBy = "Filter by";

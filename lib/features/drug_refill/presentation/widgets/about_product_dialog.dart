@@ -33,7 +33,7 @@ class _AboutProductDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final productProvider = Provider.of<ProductProvider>(context);
     final product = productProvider.getProductById(productId);
-    print(product);
+    
 
     return Consumer<DrugRefillViewModel>(builder: (context, model, child) {
       return Dialog(

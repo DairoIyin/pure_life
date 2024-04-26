@@ -4,7 +4,7 @@ class ContainerProperties {
   static const defaultRadius = Radius.circular(10.0);
   static const defaultBorderRadius = BorderRadius.all(defaultRadius);
 
-  static const defaultSecondaryRadius = Radius.circular(7.2);
+  static const defaultSecondaryRadius = Radius.circular(8);
   static const defaultSecondaryBorderRadius =
       BorderRadius.all(defaultSecondaryRadius);
 

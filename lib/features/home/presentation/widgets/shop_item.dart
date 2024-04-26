@@ -40,11 +40,13 @@ class ShopItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
+                    overflow: TextOverflow.ellipsis,
                     style:
                         context.textTheme.labelLarge?.copyWith(fontSize: 11.sp),
                   ),
                   Text(
                     '${context.naira(amount)}',
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 8.sp,

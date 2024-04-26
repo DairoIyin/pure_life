@@ -18,6 +18,7 @@ import 'package:pure_life/injection.dart';
 
 void main() {
   init();
+  CustomNavigationHelper.instance;
   runApp(const PureLifeApp());
 }
 
@@ -48,7 +49,7 @@ class PureLifeApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: pureLifeTheme,
-              routerConfig: AppNavigation.router,
+              routerConfig: CustomNavigationHelper.router,
             );
           }),
     );

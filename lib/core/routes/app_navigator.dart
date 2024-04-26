@@ -12,13 +12,20 @@ import 'package:pure_life/features/dashboard/presentation/dashboard_screen.dart'
 import 'package:pure_life/features/drug_refill/presentation/drug_refill_screen.dart';
 import 'package:pure_life/features/home/presentation/home_screen.dart';
 import 'package:pure_life/features/profile/presentation/profile_screen.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/product_details_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
-import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_skincare.dart';
-import 'package:pure_life/features/shop_and_order/presentation/presentation/supermarket.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_skincare_screen.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/supermarket_screen.dart';
 import 'package:pure_life/features/telehealth/presentation/telehealth_screen.dart';
 
-class AppNavigation {
-  AppNavigation._();
+class CustomNavigationHelper {
+  static final CustomNavigationHelper _instance =
+      CustomNavigationHelper._internal();
+
+  static CustomNavigationHelper get instance => _instance;
+
+  static late final GoRouter router;
+
   static String initRoute = AppPaths.onboardingScreenPath;
   static final _rootNavKey = GlobalKey<NavigatorState>();
   static final _rootNavHome = GlobalKey<NavigatorState>();
@@ -26,11 +33,19 @@ class AppNavigation {
   static final _rootNavTeleHealth = GlobalKey<NavigatorState>();
   static final _rootNavCart = GlobalKey<NavigatorState>();
   static final _rootNavProfile = GlobalKey<NavigatorState>();
-  static final GoRouter router = GoRouter(
-      debugLogDiagnostics: true,
-      initialLocation: initRoute,
-      navigatorKey: _rootNavKey,
-      routes: <RouteBase>[
+
+  BuildContext get context =>
+      router.routerDelegate.navigatorKey.currentContext!;
+   GoRouterDelegate get routerDelegate => router.routerDelegate;
+   GoRouteInformationParser get routeInformationParser =>
+      router.routeInformationParser;
+
+  factory CustomNavigationHelper() {
+    return _instance;
+  }
+
+  CustomNavigationHelper._internal() {
+    final routes=[
         GoRoute(
             name: AppPaths.onboardingScreenName,
             path: AppPaths.onboardingScreenPath,
@@ -85,22 +100,34 @@ class AppNavigation {
                   ]),
               StatefulShellBranch(navigatorKey: _rootNavShopAndOrder, routes: [
                 GoRoute(
-                  path: AppPaths.shopAndOrderScreenPath,
-                  name: AppPaths.shopAndOrderScreenName,
-                  builder: (context, state) => ShopAndOrderScreen(
-                    key: state.pageKey,
-                  ),
-                  routes: [
-                    GoRoute(path: AppPaths.shopSkincareScreenPath,
-                    name: AppPaths.shopSkincareScreenName,
-                    builder:(context, state) => ShopSkincareScreen(key: state.pageKey,),
-                    ),
-                    GoRoute(path: AppPaths.supermarketScreenPath,
-                    name: AppPaths.supermarketScreenName,
-                    builder:(context, state) => SupermarketScreen(key: state.pageKey,),
-                    )
-                  ]
-                )
+                    path: AppPaths.shopAndOrderScreenPath,
+                    name: AppPaths.shopAndOrderScreenName,
+                    builder: (context, state) => ShopAndOrderScreen(
+                          key: state.pageKey,
+                        ),
+                    routes: [
+                      GoRoute(
+                        path: AppPaths.shopSkincareScreenPath,
+                        name: AppPaths.shopSkincareScreenName,
+                        builder: (context, state) => ShopSkincareScreen(
+                          key: state.pageKey,
+                        ),
+                      ),
+                      GoRoute(
+                        path: AppPaths.supermarketScreenPath,
+                        name: AppPaths.supermarketScreenName,
+                        builder: (context, state) => SupermarketScreen(
+                          key: state.pageKey,
+                        ),
+                      ),
+                      GoRoute(
+                        path: AppPaths.productDetailsPath,
+                        name: AppPaths.productDetailsName,
+                        builder: (context, state) => ProductDetailsScreen(
+                          key: state.pageKey, id: state.pathParameters['id']!,
+                        ),
+                      )
+                    ])
               ]),
               StatefulShellBranch(navigatorKey: _rootNavTeleHealth, routes: [
                 GoRoute(
@@ -145,5 +172,15 @@ class AppNavigation {
                 )
               ]),
             ])
-      ]);
-}
+    ];
+
+    router = GoRouter(
+      debugLogDiagnostics: true,
+      navigatorKey: _rootNavKey,
+      initialLocation: initRoute,
+      routes: routes,
+    );
+  }
+ 
+  }
+

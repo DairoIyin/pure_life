@@ -5,6 +5,7 @@ import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
 import 'package:pure_life/core/utils/utils.dart';
+import 'package:pure_life/features/shop_and_order/presentation/widgets.dart/widgets.dart';
 
 class FilterButton extends StatelessWidget {
   const FilterButton({super.key});
@@ -13,7 +14,7 @@ class FilterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        //showModalBottomSheet(context: context, builder: builder);
+        showModalBottomSheet(context: context, builder:(context) => FilterModal(),);
       },
       child: FittedBox(
         child: Container(

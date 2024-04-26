@@ -17,4 +17,6 @@ abstract final class PureLifeColors {
   static const Color textFieldFill = Color(0xFFFEFEFE);
   static const Color paleBlue = Color(0xFFF1FFF7);
   static const Color carouselGrey = Color(0xFFECECEC);
+  static const Color buttonPink = Color(0xFFFED4DA);
+  static const Color radioGrey = Color(0xFFD9D9D9);
 }

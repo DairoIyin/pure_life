@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/app_navigator.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
@@ -104,7 +105,8 @@ class _SubscriptionBarState extends State<SubscriptionBar> {
                 PureLifeButton(
                   onPressed: () {
                     //pass radio option
-                    context.pushNamed(AppPaths.cartScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.cartScreenName);
                   },
                   title: Strings.subscribe,
                 )

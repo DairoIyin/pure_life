@@ -12,8 +12,8 @@ import 'package:pure_life/features/shop_and_order/presentation/widgets.dart/widg
 import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
-class ShopAndOrderScreen extends StatelessWidget {
-  const ShopAndOrderScreen({super.key});
+class ShopSkincareScreen extends StatelessWidget {
+  const ShopSkincareScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,11 @@ class ShopAndOrderScreen extends StatelessWidget {
           child: ListView(
         padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
         children: [
-          const PureLifeHeader(title: Strings.shopHealth),
+          const PureLifeHeader(title: Strings.shopSkincare),
           Constants.mediumVerticalGutter.verticalSpace,
           Row(
             children: [
-              const Expanded(child: ShopSearchBar(title: Strings.searchShopHealth)),
+              const Expanded(child: ShopSearchBar(title: Strings.searchShopSkincare,)),
               SizedBox(width: 6.0.w),
               const FilterButton(),
             ],

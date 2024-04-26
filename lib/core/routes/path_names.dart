@@ -29,4 +29,6 @@ class AppPaths {
   static const billingDetailsName = 'billingDetails';
   static const billingSummaryPath = 'billingSummary';
   static const billingSummaryName = 'billingSummary';
+  static const productDetailsPath = 'productDetails/:id';
+  static const productDetailsName = 'productDetails';
 }

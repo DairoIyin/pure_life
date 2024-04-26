@@ -46,11 +46,11 @@ class PureLifeBottomNavBar extends StatelessWidget {
               (index) => PureLifeBottomNavTile(
                     icon: items[index].icon,
                     title: items[index].title,
-                    isSelected: value.selectedIndex == index,
+                    isSelected: navShell.currentIndex == index,
                     onTap: () {
                       HapticFeedback.lightImpact();
-                      value.onTap(index);
-                      _goToBranch(value.selectedIndex);
+                      //   value.onTap(index);
+                      _goToBranch(index);
                     },
                   )),
         ),

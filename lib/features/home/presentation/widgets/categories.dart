@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/app_navigator.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
@@ -41,21 +42,24 @@ class ShopCategory extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.home_health,
                   onTap: () {
-                    context.pushNamed(AppPaths.shopAndOrderScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.shopAndOrderScreenName);
                   },
                   title: Strings.shopHealth,
                 ),
                 CircleMenu(
                   icon: AppIcons.volunteer_activism,
                   onTap: () {
-                    context.pushNamed(AppPaths.shopSkincareScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.shopSkincareScreenName);
                   },
                   title: Strings.shopSkincare,
                 ),
                 CircleMenu(
                   icon: AppIcons.shopping_cart,
                   onTap: () {
-                    context.pushNamed(AppPaths.supermarketScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.supermarketScreenName);
                   },
                   title: Strings.superMarket,
                 ),

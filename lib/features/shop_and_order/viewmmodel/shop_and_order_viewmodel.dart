@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pure_life/core/utils/disposable_change_notifier.dart';
+import 'package:pure_life/core/utils/enums/price_range.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/home/domain/models/models.dart';
 
@@ -10,6 +11,12 @@ class ShopScreenViewModel extends DisposableChangeNotifier {
   bool promoIsDisplayed = true;
   void onPageChanged(int index) {
     currentPage = index;
+    notifyListeners();
+  }
+
+  PriceRange? priceRange = PriceRange.below1;
+  void onRadioChanged(PriceRange? value) {
+    priceRange = value;
     notifyListeners();
   }
 

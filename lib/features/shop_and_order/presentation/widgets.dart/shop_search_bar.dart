@@ -7,8 +7,8 @@ import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
 
 class ShopSearchBar extends StatelessWidget {
-  const ShopSearchBar({super.key});
-
+  const ShopSearchBar({super.key,required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -17,7 +17,7 @@ class ShopSearchBar extends StatelessWidget {
       decoration: InputDecoration(
           filled: true,
           fillColor: PureLifeColors.onPrimary,
-          hintText: Strings.searchShopHealth,
+          hintText: title,
           //hintStyle: TextStyle(color: PureLifeColors.onPrimary),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0.w),
           enabledBorder: const OutlineInputBorder(

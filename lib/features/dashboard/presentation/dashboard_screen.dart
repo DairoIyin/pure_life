@@ -30,7 +30,8 @@ class DashboardScreen extends StatelessWidget {
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.fromLTRB(16.0.w, 12.0.h, 16.0.w, 25.0.h),
-          child:  PureLifeBottomNavBar(
+          child:  
+          PureLifeBottomNavBar(
             navShell: navShell,
             items: [
               PureLifeBottomNavItem(icon: AppIcons.home, title: Strings.home),
