@@ -1,4 +1,7 @@
-final baseUrl = 'https://api.purelifehealth.io';
+//final baseUrl = 'https://api.purelifehealth.io';
+import 'package:pure_life/core/utils/config.dart';
+
+final baseUrl = AppConfig.baseUrl;
 
 class ApiEndpoints {
   //auth
@@ -11,15 +14,12 @@ class ApiEndpoints {
 
   //product
   static final fetchProducts = '$baseUrl/api/Product/fetch-products';
-  static final listProductCategories = '$baseUrl/api/Product/list-product-categories';
+  static final listProductCategories =
+      '$baseUrl/api/Product/list-product-categories';
   static final getProducts = '$baseUrl/api/Product/get-products';
- static  final getDelivery = '$baseUrl/api/Product/get-delivery';
+  static final getDelivery = '$baseUrl/api/Product/get-delivery';
 
-
-
- //payment
+  //payment
   static final initializePayment = '$baseUrl/api/Payment/initialize-payment';
-   static final verifyPayment = '$baseUrl/api/Payment/verify-payment';
+  static final verifyPayment = '$baseUrl/api/Payment/verify-payment';
 }
-
-
