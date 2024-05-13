@@ -17,6 +17,7 @@ class DrugRefillScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: PureLifeColors.scaffold,
         body: Consumer<DrugRefillViewModel>(builder: (context, model, child) {
           return GestureDetector(
@@ -80,5 +81,6 @@ class DrugRefillScreen extends StatelessWidget {
             )),
           );
         }));
+
   }
 }

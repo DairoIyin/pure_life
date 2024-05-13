@@ -44,13 +44,15 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+
           Constants.largeVerticalGutter.verticalSpace,
           PureLifeSearchBar(hintText: Strings.searchPureLife),
+
           SizedBox(height: 18.h),
-          Carousel(),
-          TelehealthContainer(),
+          const Carousel(),
+          const TelehealthContainer(),
           SizedBox(height: 24.h),
-          ShopCategory(),
+          const ShopCategory(),
           SizedBox(height: 24.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
