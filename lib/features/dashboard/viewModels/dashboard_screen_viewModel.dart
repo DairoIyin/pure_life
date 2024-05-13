@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pure_life/core/utils/utils.dart';
 
 class DashboardViewModel extends DisposableChangeNotifier {
-  int index = 0;
+  int selectedIndex = 0;
 
   void onTap(int value) {
-    index = value;
+    selectedIndex = value;
     notifyListeners();
   }
 

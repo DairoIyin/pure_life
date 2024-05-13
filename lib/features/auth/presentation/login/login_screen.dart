@@ -3,18 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
-import 'package:pure_life/core/themes/theme_extension.dart';
-import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/icons.dart';
 import 'package:pure_life/core/utils/strings.dart';
 import 'package:pure_life/features/auth/presentation/widgets/onboarding_header.dart';
 import 'package:pure_life/features/auth/viewModels/login_screen_viewModel.dart';
-import 'package:pure_life/features/widgets/back_button.dart';
-import 'package:pure_life/features/widgets/password_text_field.dart';
-import 'package:pure_life/features/widgets/pure_life_button.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -81,8 +77,7 @@ class LoginScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () => AppNavigator.push(
-                            context, AppRoutes.forgotPswdScreen),
+                        onTap: () => context.goNamed(AppPaths.forgotPswdScreenName),
                         child: const Text(
                           Strings.forgotPassword,
                         ),
@@ -91,36 +86,14 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 36.h),
                     PureLifeButton(
                         onPressed: () {
-                          if (model.fbKey.currentState!.validate()) {
-                            AppNavigator.popAllPush(
-                                context, AppRoutes.dashboardScreen);
-                          }
+                          // if (model.fbKey.currentState!.validate()) {
+                          //   context.goNamed(AppPaths.homeScreenName);
+                          // }
+                          context.goNamed(AppPaths.homeScreenName);
                         },
                         title: Strings.signIn),
                     SizedBox(height: 16.h),
-                    SizedBox(
-                      height: 46.0.h,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            side: const BorderSide(
-                                color: PureLifeColors.lightGrey, width: 2.0),
-                            backgroundColor: PureLifeColors.onPrimary,
-                            foregroundColor: PureLifeColors.primaryText),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                AppIcons.google,
-                                height: 24.h,
-                              ),
-                              SizedBox(width: 16.w),
-                              Text(Strings.signUpWithGoogle)
-                            ]),
-                      ),
-                    )
+                    
                   ],
                 ),
               )),

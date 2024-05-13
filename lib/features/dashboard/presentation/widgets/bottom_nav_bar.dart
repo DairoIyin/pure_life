@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
@@ -19,9 +20,21 @@ class PureLifeBottomNavItem extends StatelessWidget {
   }
 }
 
-class PureLifeBottomNavBar extends StatelessWidget {
-  const PureLifeBottomNavBar({super.key, required this.items});
+class PureLifeBottomNavBar extends StatefulWidget {
+  PureLifeBottomNavBar(
+      {super.key, required this.items, required this.navShell});
   final List<PureLifeBottomNavItem> items;
+  final StatefulNavigationShell navShell;
+
+  @override
+  State<PureLifeBottomNavBar> createState() => _PureLifeBottomNavBarState();
+}
+
+class _PureLifeBottomNavBarState extends State<PureLifeBottomNavBar> {
+  // void _goToBranch(int index) {
+
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardViewModel>(builder: (context, value, child) {
@@ -34,14 +47,19 @@ class PureLifeBottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
-              items.length,
+              widget.items.length,
               (index) => PureLifeBottomNavTile(
-                    icon: items[index].icon,
-                    title: items[index].title,
-                    isSelected: value.index == index,
+                    icon: widget.items[index].icon,
+                    title: widget.items[index].title,
+                    isSelected: widget.navShell.currentIndex == index,
                     onTap: () {
                       HapticFeedback.lightImpact();
-                      value.onTap(index);
+                      //   value.onTap(index);
+                      widget.navShell.goBranch(index,
+                          initialLocation:
+                              index == widget.navShell.currentIndex);
+                      setState(() {});
+                      // _goToBranch(index);
                     },
                   )),
         ),

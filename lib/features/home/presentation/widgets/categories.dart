@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+
+import 'package:go_router/go_router.dart';
+import 'package:pure_life/core/routes/app_navigator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
+
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
@@ -40,17 +44,32 @@ class ShopCategory extends StatelessWidget {
               children: [
                 CircleMenu(
                   icon: AppIcons.home_health,
-                  onTap: () {},
+                  onTap: () {
+                    CustomNavigationHelper.router
+                        .goNamed(AppPaths.shopAndOrderScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.shopHealthScreenName);
+                  },
                   title: Strings.shopHealth,
                 ),
                 CircleMenu(
                   icon: AppIcons.volunteer_activism,
-                  onTap: () {},
+                  onTap: () {
+                    CustomNavigationHelper.router
+                        .goNamed(AppPaths.shopAndOrderScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.shopSkincareScreenName);
+                  },
                   title: Strings.shopSkincare,
                 ),
                 CircleMenu(
                   icon: AppIcons.shopping_cart,
-                  onTap: () {},
+                  onTap: () {
+                    CustomNavigationHelper.router
+                        .goNamed(AppPaths.shopAndOrderScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.supermarketScreenName);
+                  },
                   title: Strings.superMarket,
                 ),
               ],
@@ -94,7 +113,9 @@ class TelehealthContainer extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.pill,
                   onTap: () {
-                    AppNavigator.push(context, AppRoutes.drugRefill);
+
+                    context.goNamed(AppPaths.drugRefillName);
+
                   },
                   title: Strings.drugRefill,
                 ),

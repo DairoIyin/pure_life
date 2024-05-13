@@ -12,6 +12,11 @@ ThemeData pureLifeTheme = ThemeData(
           fontSize: 32.0.sp,
           fontWeight: FontWeight.w800,
           color: PureLifeColors.primaryText),
+      headlineSmall:  TextStyle(
+          fontFamily: 'BricolageGrotesque',
+          fontSize: 20.0.sp,
+          fontWeight: FontWeight.w600,
+          color: PureLifeColors.primaryText),
       bodySmall: TextStyle(
           fontFamily: 'BricolageGrotesque',
           fontSize: 12.0.sp,

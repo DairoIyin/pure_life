@@ -6,8 +6,8 @@ import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/utils/utils.dart';
 
 class PureLifeSearchBar extends StatelessWidget {
-  const PureLifeSearchBar({super.key});
-
+  const PureLifeSearchBar({super.key, required this.hintText});
+  final String hintText;
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -16,7 +16,9 @@ class PureLifeSearchBar extends StatelessWidget {
       decoration: InputDecoration(
           filled: true,
           fillColor: PureLifeColors.onPrimary,
-          hintText: Strings.searchPureLife,
+          hintText: hintText,
+          // hintStyle: TextStyle(color: PureLifeColors.onPrimary),
+
           contentPadding: EdgeInsets.symmetric(horizontal: 10.0.w),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide.none,

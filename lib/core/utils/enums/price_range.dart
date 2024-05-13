@@ -1,0 +1,1 @@
+enum PriceRange{below1,between1to3,between3to4,between4to5,between5to9,above10}

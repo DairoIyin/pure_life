@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:pure_life/core/providers/product_provider.dart';
+import 'package:pure_life/core/routes/app_navigator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/features/auth/viewModels/forgot_pwd_screen_viewModel.dart';
 import 'package:pure_life/features/auth/viewModels/login_screen_viewModel.dart';
-import 'package:pure_life/features/auth/viewModels/signup_screen.dart';
+import 'package:pure_life/features/auth/viewModels/signup_screen_view_model.dart';
+import 'package:pure_life/features/cart/viewmodel/cart_screen_view_model.dart';
 import 'package:pure_life/features/dashboard/viewModels/dashboard_screen_viewModel.dart';
 import 'package:pure_life/features/drug_refill/viewmodel/drug_refill_viewmodel.dart';
 import 'package:pure_life/features/home/viewmodel/home_screen_view_model.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
+import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
+import 'package:pure_life/injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  init();
+  CustomNavigationHelper.instance;
   runApp(const PureLifeApp());
 }
 
@@ -27,6 +36,10 @@ class PureLifeApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DashboardViewModel()),
         ChangeNotifierProvider(create: (context) => HomeScreenViewModel()),
         ChangeNotifierProvider(create: (context) => DrugRefillViewModel()),
+        ChangeNotifierProvider(create: (context) => CartScreenViewModel(getIt())),
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(
+            create: (context) => ShopScreenViewModel(getIt())),
         ChangeNotifierProvider(
             create: (context) => ForgotPasswordScreenViewModel())
       ],
@@ -34,12 +47,11 @@ class PureLifeApp extends StatelessWidget {
           designSize: const Size(375, 812),
           minTextAdapt: true,
           builder: (_, child) {
-            return MaterialApp(
+            return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: pureLifeTheme,
-              initialRoute: AppRoutes.onboardingScreen,
-              onGenerateRoute: RouteGenerator.generateRoute,
+              routerConfig: CustomNavigationHelper.router,
             );
           }),
     );

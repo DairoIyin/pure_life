@@ -20,28 +20,28 @@ class HomeScreenViewModel extends DisposableChangeNotifier {
         action: Strings.bookTest),
   ];
 
-  List<ShopItem> shopItems = [
-    ShopItem(
-        id: 1,
-        amount: '2,550.00',
-        image: AppImages.drug1,
-        title: 'Amino Pep 200ml'),
-    ShopItem(
-        id: 1,
-        amount: '2,550.00',
-        image: AppImages.drug2,
-        title: 'Amino Pep 200ml'),
-    ShopItem(
-        id: 1,
-        amount: '2,550.00',
-        image: AppImages.drug1,
-        title: 'Amino Pep 200ml'),
-    ShopItem(
-        id: 1,
-        amount: '2,550.00',
-        image: AppImages.drug2,
-        title: 'Amino Pep 200ml')
-  ];
+  // List<Product> shopItems = [
+  //   Product(
+  //       id: 1,
+  //       price: '2,550.00',
+  //       image: AppImages.drug1,
+  //       title: 'Amino Pep 200ml'),
+  //   Product(
+  //       id: 1,
+  //       price: '2,550.00',
+  //       image: AppImages.drug2,
+  //       title: 'Amino Pep 200ml'),
+  //   Product(
+  //       id: 1,
+  //       price: '2,550.00',
+  //       image: AppImages.drug1,
+  //       title: 'Amino Pep 200ml'),
+  //   Product(
+  //       id: 1,
+  //       price: '2,550.00',
+  //       image: AppImages.drug2,
+  //       title: 'Amino Pep 200ml')
+  // ];
   @override
   void disposeValues() {
     // TODO: implement disposeValues

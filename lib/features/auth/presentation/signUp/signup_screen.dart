@@ -2,13 +2,14 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:pure_life/core/routes/route_generator.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/auth/presentation/widgets/onboarding_header.dart';
-import 'package:pure_life/features/auth/viewModels/signup_screen.dart';
+import 'package:pure_life/features/auth/viewModels/signup_screen_view_model.dart';
 import 'package:pure_life/features/widgets/password_text_field.dart';
 import 'package:pure_life/features/widgets/pure_life_button.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
@@ -106,8 +107,7 @@ class SignupScreen extends StatelessWidget {
                     PureLifeButton(
                         onPressed: () {
                           if (value.fbKey.currentState!.validate()) {
-                            AppNavigator.popAllPush(
-                                context, AppRoutes.dashboardScreen);
+                            context.goNamed(AppPaths.homeScreenName);
                           }
                         },
                         title: Strings.createAccount),

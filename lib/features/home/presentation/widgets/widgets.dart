@@ -1,4 +1,4 @@
-export 'search_icon.dart';
+export 'search_bar.dart';
 export 'categories.dart';
 export 'circle_icon.dart';
 export 'circle_menu.dart';
