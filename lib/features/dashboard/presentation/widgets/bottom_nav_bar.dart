@@ -20,15 +20,20 @@ class PureLifeBottomNavItem extends StatelessWidget {
   }
 }
 
-class PureLifeBottomNavBar extends StatelessWidget {
+class PureLifeBottomNavBar extends StatefulWidget {
   PureLifeBottomNavBar(
       {super.key, required this.items, required this.navShell});
   final List<PureLifeBottomNavItem> items;
   final StatefulNavigationShell navShell;
 
-  void _goToBranch(int index) {
-    navShell.goBranch(index, initialLocation: index == navShell.currentIndex);
-  }
+  @override
+  State<PureLifeBottomNavBar> createState() => _PureLifeBottomNavBarState();
+}
+
+class _PureLifeBottomNavBarState extends State<PureLifeBottomNavBar> {
+  // void _goToBranch(int index) {
+
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +47,19 @@ class PureLifeBottomNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
-              items.length,
+              widget.items.length,
               (index) => PureLifeBottomNavTile(
-                    icon: items[index].icon,
-                    title: items[index].title,
-                    isSelected: navShell.currentIndex == index,
+                    icon: widget.items[index].icon,
+                    title: widget.items[index].title,
+                    isSelected: widget.navShell.currentIndex == index,
                     onTap: () {
                       HapticFeedback.lightImpact();
                       //   value.onTap(index);
-                      _goToBranch(index);
+                      widget.navShell.goBranch(index,
+                          initialLocation:
+                              index == widget.navShell.currentIndex);
+                      setState(() {});
+                      // _goToBranch(index);
                     },
                   )),
         ),

@@ -240,4 +240,10 @@ abstract final class Strings {
   static const productDetails = "Product Details";
   static const continueShopping = "Continue Shopping";
   static const productAlreadyAddedToCart = "Product already added to cart";
+  static const shopAll = "Shop All";
+  static const searchAll = "Search all";
+  static const productAddedToCart = "Product added to cart";
+  static const thereIsNothingInYourCart = "There is nothing in your cart";
+
+
 }

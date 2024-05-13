@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pure_life/core/data/dto/product_response_dto.dart';
 import 'package:pure_life/core/providers/product_provider.dart';
 import 'package:pure_life/core/utils/disposable_change_notifier.dart';
 
@@ -13,16 +14,16 @@ class DrugRefillViewModel extends DisposableChangeNotifier {
   TextEditingController searchController = TextEditingController();
   List<Product> displayDrugList = [];
 
-  List<Product> selectedDrugs = [];
+  List<ProductItem> selectedDrugs = [];
   bool elementIsNotfound = false;
-  void addToSelectedDrugs(Product product) {
+  void addToSelectedDrugs(ProductItem product) {
     selectedDrugs.add(product);
 
     notifyListeners();
   }
 
   void removeSelectedDrug(String title ) {
-    selectedDrugs.removeWhere((element) => element.title==title);
+    selectedDrugs.removeWhere((element) => element.name==title);
     notifyListeners();
   }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/constants.dart';
 import 'package:pure_life/core/providers/product_provider.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:pure_life/core/utils/utils.dart';
@@ -17,17 +19,25 @@ class ShopSkincareScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
+  
     return Consumer<ShopScreenViewModel>(builder: (context, value, child) {
       return SafeArea(
           child: ListView(
         padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
         children: [
-          const PureLifeHeader(title: Strings.shopSkincare),
+          PureLifeHeader(
+            title: Strings.shopSkincare,
+            onBackPressed: () {
+              context.goNamed(AppPaths.homeScreenName);
+            },
+          ),
           Constants.mediumVerticalGutter.verticalSpace,
           Row(
             children: [
-              const Expanded(child: ShopSearchBar(title: Strings.searchShopSkincare,)),
+              const Expanded(
+                  child: ShopSearchBar(
+                title: Strings.searchShopSkincare,
+              )),
               SizedBox(width: 6.0.w),
               const FilterButton(),
             ],
@@ -38,14 +48,15 @@ class ShopSkincareScreen extends StatelessWidget {
           GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount:value.productsList.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 12.h,
                 crossAxisSpacing: 15.w,
               ),
               itemBuilder: (context, index) {
-                var product = productProvider.productList[index];
+                //todo: get skincare list
+                var product = value.productsList[index];
                 return ShopItemContainer(
                   product: product,
                 );

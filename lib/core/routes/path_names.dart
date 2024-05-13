@@ -13,6 +13,8 @@ class AppPaths {
   static const homeScreenName = 'home';
   static const shopAndOrderScreenPath = '/shopAndOrder';
   static const shopAndOrderScreenName = 'shopAndOrder';
+  static const shopHealthScreenPath = 'shopHealth';
+  static const shopHealthScreenName = 'shopHealth';
   static const shopSkincareScreenPath = 'shopSkincare';
   static const shopSkincareScreenName = 'shopSkincare';
   static const supermarketScreenPath = 'supermarket';

@@ -13,11 +13,27 @@ import 'package:pure_life/features/dashboard/viewModels/dashboard_screen_viewMod
 import 'package:pure_life/features/home/presentation/home_screen.dart';
 import 'package:pure_life/features/profile/presentation/profile_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
+import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 import 'package:pure_life/features/telehealth/presentation/telehealth_screen.dart';
 
-class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key,required this.navShell});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key, required this.navShell});
   final StatefulNavigationShell navShell;
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Provider.of<ShopScreenViewModel>(context, listen: false).getProducts();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<DashboardViewModel>(builder: (context, value, child) {
@@ -26,13 +42,12 @@ class DashboardScreen extends StatelessWidget {
         body: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: navShell,
+          child: widget.navShell,
         ),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.fromLTRB(16.0.w, 12.0.h, 16.0.w, 25.0.h),
-          child:  
-          PureLifeBottomNavBar(
-            navShell: navShell,
+          child: PureLifeBottomNavBar(
+            navShell: widget.navShell,
             items: [
               PureLifeBottomNavItem(icon: AppIcons.home, title: Strings.home),
               PureLifeBottomNavItem(

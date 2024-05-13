@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:pure_life/core/constants.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/themes/themes.dart';
+import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/drug_refill/presentation/widgets/widgets.dart';
 import 'package:pure_life/features/drug_refill/viewmodel/drug_refill_viewmodel.dart';
@@ -26,7 +27,12 @@ class DrugRefillScreen extends StatelessWidget {
                 child: ListView(
               padding: EdgeInsets.fromLTRB(16.0.w, 30.0.h, 16.0.w, 23.h),
               children: [
-                PureLifeHeader(title: Strings.drugRefill),
+                PureLifeHeader(
+                  title: Strings.drugRefill,
+                  onBackPressed: () {
+                    AppNavigator.pop(context);
+                  },
+                ),
                 Constants.mediumVerticalGutter.verticalSpace,
                 Row(
                   children: [
@@ -59,9 +65,9 @@ class DrugRefillScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var product = model.selectedDrugs[index];
                           return PillSummary(
-                            title: product.title,
-                            quantityOfDrug: product.quantityInDrug,
-                            weight: product.weight,
+                            title: product.name,
+                            quantityOfDrug: '',
+                            weight: '',
                           );
                         },
                         separatorBuilder: (context, index) => SizedBox(

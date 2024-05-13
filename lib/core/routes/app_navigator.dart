@@ -14,6 +14,7 @@ import 'package:pure_life/features/home/presentation/home_screen.dart';
 import 'package:pure_life/features/profile/presentation/profile_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/product_details_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_health_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_skincare_screen.dart';
 import 'package:pure_life/features/shop_and_order/presentation/presentation/supermarket_screen.dart';
 import 'package:pure_life/features/telehealth/presentation/telehealth_screen.dart';
@@ -36,8 +37,8 @@ class CustomNavigationHelper {
 
   BuildContext get context =>
       router.routerDelegate.navigatorKey.currentContext!;
-   GoRouterDelegate get routerDelegate => router.routerDelegate;
-   GoRouteInformationParser get routeInformationParser =>
+  GoRouterDelegate get routerDelegate => router.routerDelegate;
+  GoRouteInformationParser get routeInformationParser =>
       router.routeInformationParser;
 
   factory CustomNavigationHelper() {
@@ -45,133 +46,139 @@ class CustomNavigationHelper {
   }
 
   CustomNavigationHelper._internal() {
-    final routes=[
-        GoRoute(
-            name: AppPaths.onboardingScreenName,
-            path: AppPaths.onboardingScreenPath,
-            builder: (context, state) => OnboardingScreen(),
-            routes: [
+    final routes = [
+      GoRoute(
+          name: AppPaths.onboardingScreenName,
+          path: AppPaths.onboardingScreenPath,
+          builder: (context, state) => OnboardingScreen(),
+          routes: [
+            GoRoute(
+                path: AppPaths.loginScreenPath,
+                name: AppPaths.loginScreenName,
+                builder: (context, state) => LoginScreen(
+                      key: state.pageKey,
+                    ),
+                routes: [
+                  GoRoute(
+                    path: AppPaths.forgotPswdScreenPath,
+                    name: AppPaths.forgotPswdScreenName,
+                    builder: (context, state) => ForgotPasswordScreen(),
+                  ),
+                ]),
+            GoRoute(
+              name: AppPaths.signUpScreenName,
+              path: AppPaths.signUpScreenPath,
+              builder: (context, state) => SignupScreen(
+                key: state.pageKey,
+              ),
+            ),
+          ]),
+      StatefulShellRoute.indexedStack(
+          builder: (context, state, navigationShell) {
+            return DashboardScreen(
+              navShell: navigationShell,
+            );
+          },
+          branches: <StatefulShellBranch>[
+            StatefulShellBranch(navigatorKey: _rootNavHome, routes: <RouteBase>[
               GoRoute(
-                  path: AppPaths.loginScreenPath,
-                  name: AppPaths.loginScreenName,
-                  builder: (context, state) => LoginScreen(
+                  path: AppPaths.homeScreenPath,
+                  name: AppPaths.homeScreenName,
+                  builder: (context, state) => HomeScreen(
                         key: state.pageKey,
                       ),
                   routes: [
                     GoRoute(
-                      path: AppPaths.forgotPswdScreenPath,
-                      name: AppPaths.forgotPswdScreenName,
-                      builder: (context, state) => ForgotPasswordScreen(),
-                    ),
-                  ]),
+                      path: AppPaths.drugRefillPath,
+                      name: AppPaths.drugRefillName,
+                      builder: (context, state) => DrugRefillScreen(
+                        key: state.pageKey,
+                      ),
+                    )
+                  ])
+            ]),
+            StatefulShellBranch(navigatorKey: _rootNavShopAndOrder, routes: [
               GoRoute(
-                name: AppPaths.signUpScreenName,
-                path: AppPaths.signUpScreenPath,
-                builder: (context, state) => SignupScreen(
+                  path: AppPaths.shopAndOrderScreenPath,
+                  name: AppPaths.shopAndOrderScreenName,
+                  builder: (context, state) => ShopAndOrderScreen(
+                        key: state.pageKey,
+                      ),
+                  routes: [
+                    GoRoute(
+                      path: AppPaths.shopHealthScreenPath,
+                      name: AppPaths.shopHealthScreenName,
+                      builder: (context, state) => ShopHealthScreen(
+                        key: state.pageKey,
+                      ),
+                    ),
+                    GoRoute(
+                      path: AppPaths.shopSkincareScreenPath,
+                      name: AppPaths.shopSkincareScreenName,
+                      builder: (context, state) => ShopSkincareScreen(
+                        key: state.pageKey,
+                      ),
+                    ),
+                    GoRoute(
+                      path: AppPaths.supermarketScreenPath,
+                      name: AppPaths.supermarketScreenName,
+                      builder: (context, state) => SupermarketScreen(
+                        key: state.pageKey,
+                      ),
+                    ),
+                    GoRoute(
+                      path: AppPaths.productDetailsPath,
+                      name: AppPaths.productDetailsName,
+                      builder: (context, state) => ProductDetailsScreen(
+                        key: state.pageKey,
+                        id: state.pathParameters['id']!,
+                      ),
+                    )
+                  ])
+            ]),
+            StatefulShellBranch(navigatorKey: _rootNavTeleHealth, routes: [
+              GoRoute(
+                path: AppPaths.telehealthScreenPath,
+                name: AppPaths.telehealthScreenName,
+                builder: (context, state) => TeleHealthScreen(
                   key: state.pageKey,
                 ),
-              ),
+              )
             ]),
-        StatefulShellRoute.indexedStack(
-            builder: (context, state, navigationShell) {
-              return DashboardScreen(
-                navShell: navigationShell,
-              );
-            },
-            branches: <StatefulShellBranch>[
-              StatefulShellBranch(
-                  navigatorKey: _rootNavHome,
-                  routes: <RouteBase>[
+            StatefulShellBranch(navigatorKey: _rootNavCart, routes: [
+              GoRoute(
+                  path: AppPaths.cartScreenPath,
+                  name: AppPaths.cartScreenName,
+                  builder: (context, state) => CartScreen(
+                        key: state.pageKey,
+                      ),
+                  routes: [
                     GoRoute(
-                        path: AppPaths.homeScreenPath,
-                        name: AppPaths.homeScreenName,
-                        builder: (context, state) => HomeScreen(
-                              key: state.pageKey,
-                            ),
-                        routes: [
-                          GoRoute(
-                            path: AppPaths.drugRefillPath,
-                            name: AppPaths.drugRefillName,
-                            builder: (context, state) => DrugRefillScreen(
-                              key: state.pageKey,
-                            ),
-                          )
-                        ])
-                  ]),
-              StatefulShellBranch(navigatorKey: _rootNavShopAndOrder, routes: [
-                GoRoute(
-                    path: AppPaths.shopAndOrderScreenPath,
-                    name: AppPaths.shopAndOrderScreenName,
-                    builder: (context, state) => ShopAndOrderScreen(
-                          key: state.pageKey,
-                        ),
-                    routes: [
-                      GoRoute(
-                        path: AppPaths.shopSkincareScreenPath,
-                        name: AppPaths.shopSkincareScreenName,
-                        builder: (context, state) => ShopSkincareScreen(
-                          key: state.pageKey,
-                        ),
+                      path: AppPaths.billingDetailsPath,
+                      name: AppPaths.billingDetailsName,
+                      builder: (context, state) => BillingDetailsScreen(
+                        key: state.pageKey,
                       ),
-                      GoRoute(
-                        path: AppPaths.supermarketScreenPath,
-                        name: AppPaths.supermarketScreenName,
-                        builder: (context, state) => SupermarketScreen(
-                          key: state.pageKey,
-                        ),
+                    ),
+                    GoRoute(
+                      path: AppPaths.billingSummaryPath,
+                      name: AppPaths.billingSummaryName,
+                      builder: (context, state) => BillingSummaryScreen(
+                        key: state.pageKey,
                       ),
-                      GoRoute(
-                        path: AppPaths.productDetailsPath,
-                        name: AppPaths.productDetailsName,
-                        builder: (context, state) => ProductDetailsScreen(
-                          key: state.pageKey, id: state.pathParameters['id']!,
-                        ),
-                      )
-                    ])
-              ]),
-              StatefulShellBranch(navigatorKey: _rootNavTeleHealth, routes: [
-                GoRoute(
-                  path: AppPaths.telehealthScreenPath,
-                  name: AppPaths.telehealthScreenName,
-                  builder: (context, state) => TeleHealthScreen(
-                    key: state.pageKey,
-                  ),
-                )
-              ]),
-              StatefulShellBranch(navigatorKey: _rootNavCart, routes: [
-                GoRoute(
-                    path: AppPaths.cartScreenPath,
-                    name: AppPaths.cartScreenName,
-                    builder: (context, state) => CartScreen(
-                          key: state.pageKey,
-                        ),
-                    routes: [
-                      GoRoute(
-                        path: AppPaths.billingDetailsPath,
-                        name: AppPaths.billingDetailsName,
-                        builder: (context, state) => BillingDetailsScreen(
-                          key: state.pageKey,
-                        ),
-                      ),
-                      GoRoute(
-                        path: AppPaths.billingSummaryPath,
-                        name: AppPaths.billingSummaryName,
-                        builder: (context, state) => BillingSummaryScreen(
-                          key: state.pageKey,
-                        ),
-                      ),
-                    ])
-              ]),
-              StatefulShellBranch(navigatorKey: _rootNavProfile, routes: [
-                GoRoute(
-                  path: AppPaths.profileScreenPath,
-                  name: AppPaths.profileScreenName,
-                  builder: (context, state) => ProfileScreen(
-                    key: state.pageKey,
-                  ),
-                )
-              ]),
-            ])
+                    ),
+                  ])
+            ]),
+            StatefulShellBranch(navigatorKey: _rootNavProfile, routes: [
+              GoRoute(
+                path: AppPaths.profileScreenPath,
+                name: AppPaths.profileScreenName,
+                builder: (context, state) => ProfileScreen(
+                  key: state.pageKey,
+                ),
+              )
+            ]),
+          ])
     ];
 
     router = GoRouter(
@@ -181,6 +188,4 @@ class CustomNavigationHelper {
       routes: routes,
     );
   }
- 
-  }
-
+}

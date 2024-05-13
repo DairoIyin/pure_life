@@ -10,6 +10,7 @@ import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/drug_refill/viewmodel/drug_refill_viewmodel.dart';
+import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 import 'package:pure_life/features/widgets/counter.dart';
 
 import 'package:pure_life/features/widgets/widgets.dart';
@@ -31,9 +32,8 @@ class _AboutProductDialog extends StatelessWidget {
   final String productId;
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
-    final product = productProvider.getProductById(productId);
-    
+    final productProvider = Provider.of<ShopScreenViewModel>(context);
+    final product = productProvider.getProductById(int.parse(productId));
 
     return Consumer<DrugRefillViewModel>(builder: (context, model, child) {
       return Dialog(
@@ -54,8 +54,10 @@ class _AboutProductDialog extends StatelessWidget {
                     style: context.textTheme.labelLarge,
                   ),
                   CircleCloseButon(
-                    onTap: () =>
-                        Navigator.of(context, rootNavigator: true).pop(),
+                    onTap: () {
+                      model.displayDrugList.clear();
+                      Navigator.of(context, rootNavigator: true).pop();
+                    },
                   )
                 ],
               ),
@@ -63,7 +65,7 @@ class _AboutProductDialog extends StatelessWidget {
               _Info(context,
                   title: Strings.medication,
                   subTitle:
-                      '${product?.title} ${product?.weight} *${product?.quantityInDrug}'),
+                      '${product?.name} '),
               SizedBox(height: 24.h),
               _Info(context,
                   title: Strings.description,
@@ -81,12 +83,14 @@ class _AboutProductDialog extends StatelessWidget {
                     style: context.textTheme.bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
-                  Counter(quantity: 1)
+                  //todo:implement this
+                  //Counter(productId: ,)
                 ],
               ),
               SizedBox(height: 35.h),
               PureLifeButton(
                 onPressed: () {
+                  model.displayDrugList.clear();
                   model.addToSelectedDrugs(product!);
                   FocusScope.of(context).unfocus();
                   //model.searchController.clear();

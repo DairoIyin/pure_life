@@ -75,7 +75,7 @@ class FilterModal extends StatelessWidget {
                 height: 46.h,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context, rootNavigator: true).pop();
+                      Navigator.of(context).pop();
                     },
                     child: const Text(Strings.okay))),
             Constants.largeVerticalGutter.verticalSpace,

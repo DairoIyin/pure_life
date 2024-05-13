@@ -25,4 +25,5 @@ abstract final class AppIcons {
   static const edit = "assets/icons/edit.svg";
   static const sort = "assets/icons/sort.svg";
   static const delete = "assets/icons/delete.svg";
+  static const empty_cart = "assets/icons/empty-cart.svg";
 }

@@ -86,36 +86,14 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 36.h),
                     PureLifeButton(
                         onPressed: () {
-                          if (model.fbKey.currentState!.validate()) {
-                            context.goNamed(AppPaths.homeScreenName);
-                           
-                          }
+                          // if (model.fbKey.currentState!.validate()) {
+                          //   context.goNamed(AppPaths.homeScreenName);
+                          // }
+                          context.goNamed(AppPaths.homeScreenName);
                         },
                         title: Strings.signIn),
                     SizedBox(height: 16.h),
-                    SizedBox(
-                      height: 46.0.h,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            side: const BorderSide(
-                                color: PureLifeColors.lightGrey, width: 2.0),
-                            backgroundColor: PureLifeColors.onPrimary,
-                            foregroundColor: PureLifeColors.primaryText),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                AppIcons.google,
-                                height: 24.h,
-                              ),
-                              SizedBox(width: 16.w),
-                              Text(Strings.signUpWithGoogle)
-                            ]),
-                      ),
-                    )
+                    
                   ],
                 ),
               )),

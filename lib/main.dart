@@ -17,6 +17,7 @@ import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_view
 import 'package:pure_life/injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   init();
   CustomNavigationHelper.instance;
   runApp(const PureLifeApp());
@@ -35,9 +36,10 @@ class PureLifeApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DashboardViewModel()),
         ChangeNotifierProvider(create: (context) => HomeScreenViewModel()),
         ChangeNotifierProvider(create: (context) => DrugRefillViewModel()),
-        ChangeNotifierProvider(create: (context) => CartScreenViewModel()),
+        ChangeNotifierProvider(create: (context) => CartScreenViewModel(getIt())),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
-        ChangeNotifierProvider(create: (context) => ShopScreenViewModel()),
+        ChangeNotifierProvider(
+            create: (context) => ShopScreenViewModel(getIt())),
         ChangeNotifierProvider(
             create: (context) => ForgotPasswordScreenViewModel())
       ],

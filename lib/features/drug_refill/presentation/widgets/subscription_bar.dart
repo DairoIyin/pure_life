@@ -106,7 +106,7 @@ class _SubscriptionBarState extends State<SubscriptionBar> {
                   onPressed: () {
                     //pass radio option
                     CustomNavigationHelper.router
-                        .pushNamed(AppPaths.cartScreenName);
+                        .goNamed(AppPaths.cartScreenName);
                   },
                   title: Strings.subscribe,
                 )

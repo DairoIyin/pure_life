@@ -43,13 +43,17 @@ class ShopCategory extends StatelessWidget {
                   icon: AppIcons.home_health,
                   onTap: () {
                     CustomNavigationHelper.router
-                        .pushNamed(AppPaths.shopAndOrderScreenName);
+                        .goNamed(AppPaths.shopAndOrderScreenName);
+                    CustomNavigationHelper.router
+                        .pushNamed(AppPaths.shopHealthScreenName);
                   },
                   title: Strings.shopHealth,
                 ),
                 CircleMenu(
                   icon: AppIcons.volunteer_activism,
                   onTap: () {
+                    CustomNavigationHelper.router
+                        .goNamed(AppPaths.shopAndOrderScreenName);
                     CustomNavigationHelper.router
                         .pushNamed(AppPaths.shopSkincareScreenName);
                   },
@@ -58,6 +62,8 @@ class ShopCategory extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.shopping_cart,
                   onTap: () {
+                    CustomNavigationHelper.router
+                        .goNamed(AppPaths.shopAndOrderScreenName);
                     CustomNavigationHelper.router
                         .pushNamed(AppPaths.supermarketScreenName);
                   },

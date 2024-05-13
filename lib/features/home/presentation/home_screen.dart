@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/constants.dart';
 import 'package:pure_life/core/providers/product_provider.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/home/presentation/widgets/widgets.dart';
 import 'package:pure_life/features/home/viewmodel/home_screen_view_model.dart';
+import 'package:pure_life/features/shop_and_order/presentation/presentation/shop_and_order_screen.dart';
+import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ProductProvider>(context);
+    final shopProvider = Provider.of<ShopScreenViewModel>(context);
     return Consumer<HomeScreenViewModel>(builder: (context, value, child) {
       return SafeArea(
           child: ListView(
@@ -53,6 +57,9 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text(Strings.shopAndOrder, style: context.textTheme.labelLarge),
               GestureDetector(
+                  onTap: () {
+                    context.goNamed(AppPaths.shopAndOrderScreenName);
+                  },
                   child:
                       Text(Strings.seeAll, style: context.textTheme.bodyMedium))
             ],
@@ -61,18 +68,17 @@ class HomeScreen extends StatelessWidget {
           GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: shopProvider.productsList.isNotEmpty ? 4 : 0,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 12.h,
                 crossAxisSpacing: 15.w,
               ),
               itemBuilder: (context, index) {
-                var product = productProvider.productList[index];
+                print(shopProvider.productsList.length);
+                var product = shopProvider.productsList[index];
                 return ShopItem(
-                    image: product.image,
-                    amount: product.price,
-                    title: product.title);
+                    product: product,);
               })
         ],
       ));

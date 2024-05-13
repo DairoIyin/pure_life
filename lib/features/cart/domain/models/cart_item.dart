@@ -1,15 +1,10 @@
-class CartItem {
-  CartItem(
-      {required this.amount,
-      required this.description,
-       this.quantity=1,
-      required this.title,
-      required this.weight});
-  String title;
-  String description;
-  String weight;
-  num amount;
-  int quantity;
-
- 
+class CartItemModel {
+  CartItemModel({
+    required this.productId,
+    required this.cartId,
+    required this.quantity,
+  });
+  final num productId;
+  final String cartId;
+  final num quantity;
 }

@@ -5,21 +5,18 @@ import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
 class PureLifeHeader extends StatelessWidget {
-  const PureLifeHeader({super.key,required this.title});
+  const PureLifeHeader({super.key, required this.title,required this.onBackPressed});
   final String title;
-
+  final VoidCallback onBackPressed;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         PureLifeBackButton(
-          onTap: () => AppNavigator.pop(context),
+          onTap: onBackPressed
         ),
-        Text(
-          title,
-          style:context.textTheme.bodyLarge
-        ),
+        Text(title, style: context.textTheme.bodyLarge),
         SizedBox(width: 34.67.w)
       ],
     );
