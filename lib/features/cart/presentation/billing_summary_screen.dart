@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/constants.dart';
+import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
@@ -10,8 +13,23 @@ import 'package:pure_life/features/cart/viewmodel/cart_screen_view_model.dart';
 import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
-class BillingSummaryScreen extends StatelessWidget {
+class BillingSummaryScreen extends StatefulWidget {
   const BillingSummaryScreen({super.key});
+
+  @override
+  State<BillingSummaryScreen> createState() => _BillingSummaryScreenState();
+}
+
+class _BillingSummaryScreenState extends State<BillingSummaryScreen> {
+  var publicKey = 'pk_test_81cfbf5ed6f6de61a2753c9d1a068ca769eb6ca3';
+  final plugin = PaystackPlugin();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    plugin.initialize(publicKey: publicKey);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +48,32 @@ class BillingSummaryScreen extends StatelessWidget {
               },
             ),
             SizedBox(height: 29.h),
-            const BillingDetailsContainer(
-                name: 'Cecilia Obe',
-                email: 'Cecilia.damsel@gmail.com',
+            BillingDetailsContainer(
+                name: value.fName.text,
+                email: value.email.text,
                 address: 'N/A',
-                phone: '09034312743'),
+                phone: value.streetAddress.text),
             Constants.largeVerticalGutter.verticalSpace,
             OrderSummaryContainer(
               amount: value.getTotal(shopScreenViewModel),
               deliveryFee: 0.00,
               buttonTitle: Strings.placeOrder,
-              action: () {},
+              action: () async {
+                value.initializeOrder();
+
+                CheckoutResponse response = await plugin.checkout(
+                  context,
+                  method: CheckoutMethod
+                      .card, // Defaults to CheckoutMethod.selectable
+                  charge: value.charge,
+                );
+                if (response.message == 'Success') {
+                  value.clearCart();
+                  context.pop();
+                  context.pop();
+                  context.goNamed(AppPaths.homeScreenName);
+                }
+              },
             )
           ],
         )),

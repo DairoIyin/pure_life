@@ -66,27 +66,31 @@ class _ResultTile extends StatelessWidget {
   final String id;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      //pass the product id to the on tappage
-      onTap: () {
-        // print(id);
-        showAboutProductDialog(context, id);
-      },
-      title: Text(
-        title,
-        style:
-            context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
-      ),
-      leading: Container(
-        width: 38.49.w,
-        height: 38.44.h,
-        padding: EdgeInsets.all(10.56),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(2.5.r)),
-            color: PureLifeColors.paleRed),
-        child: SvgPicture.asset(AppIcons.pill, width: 16.w, height: 16.h),
-      ),
-    );
+    return Consumer<DrugRefillViewModel>(builder: (context, model, child) {
+      return ListTile(
+        //pass the product id to the on tappage
+        onTap: () {
+          final product=model.getProductById(id);
+          showAboutProductDialog(
+            context,product!
+          );
+        },
+        title: Text(
+          title,
+          style: context.textTheme.bodyMedium
+              ?.copyWith(fontWeight: FontWeight.w400),
+        ),
+        leading: Container(
+          width: 38.49.w,
+          height: 38.44.h,
+          padding: EdgeInsets.all(10.56),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(2.5.r)),
+              color: PureLifeColors.paleRed),
+          child: SvgPicture.asset(AppIcons.pill, width: 16.w, height: 16.h),
+        ),
+      );
+    });
   }
 }
 

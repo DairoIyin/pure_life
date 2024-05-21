@@ -20,7 +20,7 @@ EitherExceptionOr<E> _transformResponse<E>(
     dynamic data, E Function(dynamic) transform) {
   try {
     final json = data as Map<String, dynamic>;
-     return Right(transform(json['data']));
+     return Right(transform(json['result']));
     // switch ((json['status'] as String).status) {
     //   case Status.success:
     //     return Right(transform(json['data']));

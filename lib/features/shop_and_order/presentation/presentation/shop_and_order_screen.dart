@@ -7,6 +7,7 @@ import 'package:pure_life/core/providers/product_provider.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:pure_life/core/utils/enums/category_enum.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/cart/viewmodel/cart_screen_view_model.dart';
 import 'package:pure_life/features/home/presentation/widgets/widgets.dart';
@@ -16,15 +17,21 @@ import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_view
 import 'package:pure_life/features/widgets/widgets.dart';
 
 //aka shop all
-class ShopAndOrderScreen extends StatelessWidget {
+class ShopAndOrderScreen extends StatefulWidget {
   const ShopAndOrderScreen({super.key});
 
   @override
+  State<ShopAndOrderScreen> createState() => _ShopAndOrderScreenState();
+}
+
+class _ShopAndOrderScreenState extends State<ShopAndOrderScreen> {
+  ScrollController _scrollController = ScrollController();
+  @override
   Widget build(BuildContext context) {
-   
     return Consumer<ShopScreenViewModel>(builder: (context, value, child) {
       return SafeArea(
           child: ListView(
+        controller: _scrollController,
         padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
         children: [
           PureLifeHeader(
@@ -67,7 +74,12 @@ class ShopAndOrderScreen extends StatelessWidget {
               Expanded(
                 child: NumberPaginator(
                   numberPages: value.noOfPages,
-                  onPageChange: (index) => value.onPageChanged(index),
+                  onPageChange: (index) {
+                    _scrollController.animateTo(0,
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.linear);
+                    value.onPageChanged(context, index, CategoryEnum.all);
+                  },
                   showNextButton: false,
                   showPrevButton: false,
                   config: const NumberPaginatorUIConfig(

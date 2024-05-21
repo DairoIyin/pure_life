@@ -75,7 +75,7 @@ class BillingDetailsContainer extends StatelessWidget {
             _Info(context,
                 title: Strings.name,
                 subTitle: Text(
-                  'Cecilia Obe',
+                  name,
                   style: textStyle,
                   textAlign: TextAlign.right,
                 )),
@@ -83,7 +83,7 @@ class BillingDetailsContainer extends StatelessWidget {
             _Info(context,
                 title: Strings.email,
                 subTitle: Text(
-                  'Cecilia.damsel@gmail.com',
+                  email,
                   style: textStyle,
                   textAlign: TextAlign.right,
                 )),
@@ -91,7 +91,7 @@ class BillingDetailsContainer extends StatelessWidget {
             _Info(context,
                 title: Strings.phoneNumber,
                 subTitle: Text(
-                  '08026762440',
+                  phone,
                   style: textStyle,
                   textAlign: TextAlign.right,
                 )),
@@ -99,7 +99,7 @@ class BillingDetailsContainer extends StatelessWidget {
             _Info(context,
                 title: Strings.contactAddress,
                 subTitle: Text(
-                  'N/A',
+                  address,
                   style: textStyle,
                   textAlign: TextAlign.right,
                 )),

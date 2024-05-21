@@ -19,7 +19,9 @@ import 'package:pure_life/features/widgets/widgets.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.id});
+  //id is a string because path params need to be strings.
   final String id;
+
   @override
   Widget build(BuildContext context) {
     final shopScreenViewModel = Provider.of<ShopScreenViewModel>(context);
@@ -61,14 +63,20 @@ class ProductDetailsScreen extends StatelessWidget {
             Constants.largeVerticalGutter.verticalSpace,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [_Counter(), _DeleteBtn()],
+              children: [
+                _Counter(
+                  quantity: product!.quantity,
+                  productId: int.parse(id),
+                ),
+                _DeleteBtn()
+              ],
             ),
             Constants.smallVerticalGutter.verticalSpace,
             SizedBox(
               height: 46.h,
               child: ElevatedButton(
                 onPressed: () {
-                  context.goNamed(AppPaths.shopAndOrderScreenName);
+                  AppNavigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,
@@ -91,11 +99,11 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
             Constants.mediumVerticalGutter.verticalSpace,
             OrderSummaryContainer(
-                amount: (product?.price ?? 0.0 * product!.quantity),
+                amount: shopScreenViewModel.getTotal(product),
                 deliveryFee: 0.0,
                 buttonTitle: Strings.continueShopping,
                 action: () {
-                  context.goNamed(AppPaths.shopAndOrderScreenName);
+                  AppNavigator.pop(context);
                 })
           ],
         ),
@@ -104,55 +112,51 @@ class ProductDetailsScreen extends StatelessWidget {
   }
 }
 
-class _Counter extends StatefulWidget {
-  _Counter({this.quantity = 1});
-  int quantity;
+class _Counter extends StatelessWidget {
+  _Counter({required this.quantity, required this.productId});
+  final num quantity;
+  final num productId;
 
-  @override
-  State<_Counter> createState() => _CounterState();
-}
-
-class _CounterState extends State<_Counter> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: 84.w,
-        height: 46.h,
-        padding: EdgeInsets.symmetric(horizontal: 10.56.w),
-        decoration: BoxDecoration(
-            borderRadius: ContainerProperties.defaultBorderRadius,
-            color: PureLifeColors.buttonPink),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    widget.quantity--;
-                  });
-                },
-                child: Text(
-                  '-',
-                  style:
-                      TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
-                )),
-            Text(
-              '${widget.quantity}',
-              style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
-            ),
-            InkWell(
-                onTap: () {
-                  setState(() {
-                    widget.quantity++;
-                  });
-                },
-                child: Text(
-                  '+',
-                  style:
-                      TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
-                )),
-          ],
-        ));
+    return Consumer<ShopScreenViewModel>(builder: (context, value, child) {
+      return Container(
+          width: 84.w,
+          height: 46.h,
+          padding: EdgeInsets.symmetric(horizontal: 10.56.w),
+          decoration: BoxDecoration(
+              borderRadius: ContainerProperties.defaultBorderRadius,
+              color: PureLifeColors.buttonPink),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                  onTap: () {
+                    value.decrementProductItem(
+                        productId: productId, quantity: quantity);
+                  },
+                  child: Text(
+                    '-',
+                    style:
+                        TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
+                  )),
+              Text(
+                '$quantity',
+                style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
+              ),
+              InkWell(
+                  onTap: () {
+                    value.incrementProductItem(
+                        productId: productId, quantity: quantity);
+                  },
+                  child: Text(
+                    '+',
+                    style:
+                        TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
+                  )),
+            ],
+          ));
+    });
   }
 }
 

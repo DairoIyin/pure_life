@@ -1,3 +1,10 @@
 export 'delivery_response_dto.dart';
 export 'payment_request_dto.dart';
 export 'product_response_dto.dart';
+export 'categories_response_dto.dart';
+export 'create_bulk_sale_request_dto.dart';
+export 'create_bulk_sale_response_dto.dart';
+export 'read_sale_response_dto.dart';
+export 'initiate_paystack_request_dto.dart';
+export 'create_payment_request_dto.dart';
+export 'validate_payment_request_dto.dart';

@@ -14,16 +14,16 @@ class DrugRefillViewModel extends DisposableChangeNotifier {
   TextEditingController searchController = TextEditingController();
   List<Product> displayDrugList = [];
 
-  List<ProductItem> selectedDrugs = [];
+  List<Product> selectedDrugs = [];
   bool elementIsNotfound = false;
-  void addToSelectedDrugs(ProductItem product) {
+  void addToSelectedDrugs(Product product) {
     selectedDrugs.add(product);
 
     notifyListeners();
   }
 
   void removeSelectedDrug(String title ) {
-    selectedDrugs.removeWhere((element) => element.name==title);
+    selectedDrugs.removeWhere((element) => element.title==title);
     notifyListeners();
   }
 
@@ -40,6 +40,13 @@ class DrugRefillViewModel extends DisposableChangeNotifier {
       displayDrugList.clear();
     }
     notifyListeners();
+  }
+
+   Product? getProductById(String id) {
+    if (productsList.where((element) => element.id == id).isEmpty) {
+      return null;
+    }
+    return productsList.firstWhere((element) => element.id == id);
   }
 
   @override

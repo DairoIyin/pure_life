@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/themes/pure_life_colors.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
+import 'package:pure_life/core/utils/enums/category_enum.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/cart/presentation/cart_screen.dart';
 import 'package:pure_life/features/dashboard/presentation/widgets/bottom_nav_bar.dart';
@@ -29,8 +30,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //call fetchProducts afte getCategories has returned a value.
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Provider.of<ShopScreenViewModel>(context, listen: false).getProducts();
+      Provider.of<ShopScreenViewModel>(context, listen: false)
+          .getCategories()
+          .then((value) {
+        
+        Provider.of<ShopScreenViewModel>(context, listen: false)
+            .fetchProducts(category: CategoryEnum.all);
+      });
     });
   }
 

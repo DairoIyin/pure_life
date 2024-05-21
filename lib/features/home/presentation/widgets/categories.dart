@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:pure_life/core/routes/app_navigator.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/container_properties.dart';
 import 'package:pure_life/core/ui_utils/extensions/routing_extension.dart';
+import 'package:pure_life/core/utils/enums/category_enum.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/home/presentation/widgets/widgets.dart';
+import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 
 class ShopCategory extends StatelessWidget {
   const ShopCategory({
@@ -45,6 +48,11 @@ class ShopCategory extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.home_health,
                   onTap: () {
+                    //get products
+                    WidgetsBinding.instance.addPostFrameCallback((_) async {
+                      Provider.of<ShopScreenViewModel>(context, listen: false)
+                          .fetchProducts(category: CategoryEnum.health);
+                    });
                     CustomNavigationHelper.router
                         .goNamed(AppPaths.shopAndOrderScreenName);
                     CustomNavigationHelper.router
@@ -55,6 +63,11 @@ class ShopCategory extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.volunteer_activism,
                   onTap: () {
+                    WidgetsBinding.instance.addPostFrameCallback((_) async {
+                      Provider.of<ShopScreenViewModel>(context, listen: false)
+                          .fetchProducts(category: CategoryEnum.beauty);
+                    });
+
                     CustomNavigationHelper.router
                         .goNamed(AppPaths.shopAndOrderScreenName);
                     CustomNavigationHelper.router
@@ -65,6 +78,11 @@ class ShopCategory extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.shopping_cart,
                   onTap: () {
+                    WidgetsBinding.instance.addPostFrameCallback((_) async {
+                      Provider.of<ShopScreenViewModel>(context, listen: false)
+                          .fetchProducts(category: CategoryEnum.supermarket);
+                    });
+
                     CustomNavigationHelper.router
                         .goNamed(AppPaths.shopAndOrderScreenName);
                     CustomNavigationHelper.router
@@ -113,9 +131,7 @@ class TelehealthContainer extends StatelessWidget {
                 CircleMenu(
                   icon: AppIcons.pill,
                   onTap: () {
-
                     context.goNamed(AppPaths.drugRefillName);
-
                   },
                   title: Strings.drugRefill,
                 ),

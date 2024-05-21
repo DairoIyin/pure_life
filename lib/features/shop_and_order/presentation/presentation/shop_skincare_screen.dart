@@ -7,6 +7,7 @@ import 'package:pure_life/core/providers/product_provider.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:pure_life/core/utils/enums/category_enum.dart';
 import 'package:pure_life/core/utils/utils.dart';
 import 'package:pure_life/features/home/presentation/widgets/widgets.dart';
 import 'package:pure_life/features/home/viewmodel/home_screen_view_model.dart';
@@ -14,15 +15,21 @@ import 'package:pure_life/features/shop_and_order/presentation/widgets.dart/widg
 import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
-class ShopSkincareScreen extends StatelessWidget {
+class ShopSkincareScreen extends StatefulWidget {
   const ShopSkincareScreen({super.key});
 
   @override
+  State<ShopSkincareScreen> createState() => _ShopSkincareScreenState();
+}
+
+class _ShopSkincareScreenState extends State<ShopSkincareScreen> {
+  ScrollController _scrollController = ScrollController();
+  @override
   Widget build(BuildContext context) {
-  
     return Consumer<ShopScreenViewModel>(builder: (context, value, child) {
       return SafeArea(
           child: ListView(
+        controller: _scrollController,
         padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
         children: [
           PureLifeHeader(
@@ -48,7 +55,7 @@ class ShopSkincareScreen extends StatelessWidget {
           GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount:value.productsList.length,
+              itemCount: value.productsList.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 12.h,
@@ -69,7 +76,12 @@ class ShopSkincareScreen extends StatelessWidget {
               Expanded(
                 child: NumberPaginator(
                   numberPages: value.noOfPages,
-                  onPageChange: (index) => value.onPageChanged(index),
+                  onPageChange: (index) {
+                    _scrollController.animateTo(0,
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.linear);
+                    value.onPageChanged(context, index, CategoryEnum.beauty);
+                  },
                   showNextButton: false,
                   showPrevButton: false,
                   config: const NumberPaginatorUIConfig(

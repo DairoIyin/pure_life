@@ -7,21 +7,28 @@ import 'package:pure_life/core/providers/product_provider.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:number_paginator/number_paginator.dart';
+import 'package:pure_life/core/utils/enums/category_enum.dart';
 import 'package:pure_life/core/utils/utils.dart';
 
 import 'package:pure_life/features/shop_and_order/presentation/widgets.dart/widgets.dart';
 import 'package:pure_life/features/shop_and_order/viewmmodel/shop_and_order_viewmodel.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
-class SupermarketScreen extends StatelessWidget {
+class SupermarketScreen extends StatefulWidget {
   const SupermarketScreen({super.key});
 
   @override
+  State<SupermarketScreen> createState() => _SupermarketScreenState();
+}
+
+class _SupermarketScreenState extends State<SupermarketScreen> {
+  ScrollController _scrollController = ScrollController();
+  @override
   Widget build(BuildContext context) {
-   
     return Consumer<ShopScreenViewModel>(builder: (context, value, child) {
       return SafeArea(
           child: ListView(
+        controller: _scrollController,
         padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
         children: [
           PureLifeHeader(
@@ -68,7 +75,13 @@ class SupermarketScreen extends StatelessWidget {
               Expanded(
                 child: NumberPaginator(
                   numberPages: value.noOfPages,
-                  onPageChange: (index) => value.onPageChanged(index),
+                  onPageChange: (index) {
+                    _scrollController.animateTo(0,
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.linear);
+                    value.onPageChanged(
+                        context, index, CategoryEnum.supermarket);
+                  },
                   showNextButton: false,
                   showPrevButton: false,
                   config: const NumberPaginatorUIConfig(

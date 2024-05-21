@@ -17,27 +17,26 @@ import 'package:pure_life/features/widgets/widgets.dart';
 import 'package:pure_life/injection.dart';
 
 Future<void> showAboutProductDialog(
-    BuildContext context, String productId) async {
+    BuildContext context, Product product) async {
   await showDialog(
     context: context,
     barrierDismissible: false,
     builder: (_) => _AboutProductDialog(
-      productId: productId,
+      product: product,
     ),
   );
 }
 
 class _AboutProductDialog extends StatelessWidget {
-  const _AboutProductDialog({super.key, required this.productId});
-  final String productId;
+  const _AboutProductDialog({super.key, required this.product});
+  final Product product;
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<ShopScreenViewModel>(context);
-    final product = productProvider.getProductById(int.parse(productId));
+
 
     return Consumer<DrugRefillViewModel>(builder: (context, model, child) {
       return Dialog(
-        surfaceTintColor: PureLifeColors.onPrimary,
+        surfaceTintColor: const Color.fromRGBO(255, 255, 255, 1),
         insetPadding: EdgeInsets.all(20.0),
         shape: const RoundedRectangleBorder(
             borderRadius: ContainerProperties.defaultBorderRadius),
@@ -63,13 +62,7 @@ class _AboutProductDialog extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
               _Info(context,
-                  title: Strings.medication,
-                  subTitle:
-                      '${product?.name} '),
-              SizedBox(height: 24.h),
-              _Info(context,
-                  title: Strings.description,
-                  subTitle: product?.description ?? 'Description'),
+                  title: Strings.medication, subTitle: '${product?.title} '),
               SizedBox(height: 24.h),
               _Info(context,
                   title: Strings.productPrice,

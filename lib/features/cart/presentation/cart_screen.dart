@@ -14,58 +14,72 @@ import 'package:pure_life/features/widgets/widgets.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
-     final shopScreenViewModel = Provider.of<ShopScreenViewModel>(context);
+    final shopScreenViewModel = Provider.of<ShopScreenViewModel>(context);
     return Consumer<CartScreenViewModel>(builder: (context, value, child) {
       return GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child:  value.cartItems.isEmpty?
-              Scaffold(
-                body: Center(
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(AppIcons.empty_cart,color: PureLifeColors.primaryText,),
-                      Constants.mediumVerticalGutter.verticalSpace,
-                      Text(Strings.thereIsNothingInYourCart, style: context.textTheme.headlineMedium,)
-                    ],
+        child: value.cartItems.isEmpty
+            ? Scaffold(
+                backgroundColor: PureLifeColors.scaffold,
+                body: SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            AppIcons.empty_cart,
+                            width: 100.w,
+                            height: 100.h,
+                            color: PureLifeColors.primaryText,
+                          ),
+                          Constants.largeVerticalGutter.verticalSpace,
+                          Text(
+                            Strings.thereIsNothingInYourCart,
+                            style: context.textTheme.headlineSmall,
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ):Scaffold(
-          backgroundColor: PureLifeColors.scaffold,
-          body: SafeArea(
-              child: ListView(
-            padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
-            children: [
-              
-             
-              ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final cartItem = value.cartItems.values.toList()[index];
-                    return CartItemTile(
-                      cartId:cartItem.cartId
-                        );
-                  },
-                  separatorBuilder: (context, index) =>
-                      Constants.smallVerticalGutter.verticalSpace,
-                  itemCount: value.cartItems.length),
-              Constants.largeVerticalGutter.verticalSpace,
-              OrderSummaryContainer(
-                amount: value.getTotal(shopScreenViewModel),
-                deliveryFee: 0.00,
-                buttonTitle: Strings.checkout,
-                action: () {
-                  context.goNamed(AppPaths.billingDetailsName);
-                },
               )
-            ],
-          )),
-        ),
+            : Scaffold(
+                backgroundColor: PureLifeColors.scaffold,
+                body: SafeArea(
+                    child: ListView(
+                  padding: EdgeInsets.fromLTRB(16.0.w, 20.0.h, 16.0.w, 23.h),
+                  children: [
+                    ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          final cartItem =
+                              value.cartItems.values.toList()[index];
+                          return CartItemTile(cartId: cartItem.cartId);
+                        },
+                        separatorBuilder: (context, index) =>
+                            Constants.smallVerticalGutter.verticalSpace,
+                        itemCount: value.cartItems.length),
+                    Constants.largeVerticalGutter.verticalSpace,
+                    OrderSummaryContainer(
+                      amount: value.getTotal(shopScreenViewModel),
+                      deliveryFee: 0.00,
+                      buttonTitle: Strings.checkout,
+                      action: () {
+                        context.goNamed(AppPaths.billingDetailsName);
+                      },
+                    )
+                  ],
+                )),
+              ),
       );
     });
   }

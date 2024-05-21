@@ -30,6 +30,11 @@ dependencies:
   either_dart: ^1.0.0
   equatable: ^2.0.5
 
+  flutter_paystack:
+    git:
+      url: https://github.com/DairoIyin/flutter_paystack
+      
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

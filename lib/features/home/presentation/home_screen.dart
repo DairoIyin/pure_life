@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 15.w,
               ),
               itemBuilder: (context, index) {
-                print(shopProvider.productsList.length);
+      
                 var product = shopProvider.productsList[index];
                 return ShopItem(
                     product: product,);

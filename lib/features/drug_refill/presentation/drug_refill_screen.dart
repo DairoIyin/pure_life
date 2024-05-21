@@ -66,7 +66,7 @@ class DrugRefillScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           var product = model.selectedDrugs[index];
                           return PillSummary(
-                            title: product.name,
+                            title: product.title,
                             quantityOfDrug: '',
                             weight: '',
                           );

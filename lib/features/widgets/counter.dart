@@ -40,7 +40,8 @@ class _CounterState extends State<Counter> {
                 '${widget.quantity}',
                 style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
               ),
-              InkWell(
+              GestureDetector(
+                  behavior: HitTestBehavior.translucent,
                   onTap: () {
                     value.incrementCartItem(
                         productId: widget.productId, quantity: widget.quantity);

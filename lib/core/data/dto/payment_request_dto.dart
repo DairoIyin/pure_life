@@ -11,7 +11,7 @@ final class Payment extends Equatable {
     required this.amount,
   });
 
-  Map<String, dynamic> toJson(Map<String, dynamic> json) => {
+  Map<String, dynamic> toJson() => {
         'userId': userId,
         'userEmail': userEmail,
         'amount': amount,

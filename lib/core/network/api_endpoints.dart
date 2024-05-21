@@ -19,7 +19,13 @@ class ApiEndpoints {
   static final getProducts = '$baseUrl/api/Product/get-products';
   static final getDelivery = '$baseUrl/api/Product/get-delivery';
 
-  //payment
-  static final initializePayment = '$baseUrl/api/Payment/initialize-payment';
-  static final verifyPayment = '$baseUrl/api/Payment/verify-payment';
+//sales
+  static final createBulkSale = '$baseUrl/api/Sales/create-bulk-sale';
+  static final readSale = '$baseUrl/api/Sales/read-sale';
+
+
+  //transactions
+  static final initiatePaystackPayment = '$baseUrl/api/Transactions/initiate-paystack-payment';
+  static final createPayment = '$baseUrl/api/Transactions/create-payment';
+  static final validatePayment = '$baseUrl/api/Transactions/validate-payment';
 }

@@ -150,6 +150,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_paystack:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "5de5adf0edaa9411d7fac0fe38a5777204662928"
+      url: "https://github.com/DairoIyin/flutter_paystack"
+    source: git
+    version: "1.0.7"
   flutter_screenutil:
     dependency: "direct main"
     description:
