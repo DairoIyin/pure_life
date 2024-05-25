@@ -77,7 +77,8 @@ class LoginScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
-                        onTap: () => context.goNamed(AppPaths.forgotPswdScreenName),
+                        onTap: () =>
+                            context.goNamed(AppPaths.forgotPswdScreenName),
                         child: const Text(
                           Strings.forgotPassword,
                         ),
@@ -86,14 +87,12 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 36.h),
                     PureLifeButton(
                         onPressed: () {
-                          // if (model.fbKey.currentState!.validate()) {
-                          //   context.goNamed(AppPaths.homeScreenName);
-                          // }
-                          context.goNamed(AppPaths.homeScreenName);
+                          if (model.fbKey.currentState!.validate()) {
+                            model.login(context);
+                          }
                         },
-                        title: Strings.signIn),
+                        title: model.loginText),
                     SizedBox(height: 16.h),
-                    
                   ],
                 ),
               )),

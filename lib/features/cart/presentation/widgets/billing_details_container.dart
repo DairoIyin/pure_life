@@ -33,7 +33,7 @@ class BillingDetailsContainer extends StatelessWidget {
           borderRadius: ContainerProperties.defaultBorderRadius,
           color: PureLifeColors.onPrimary),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(27.51, 19.0, 24.49, 40.3),
+        padding: const EdgeInsets.fromLTRB(27.51, 19.0, 24.49, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

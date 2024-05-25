@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:pure_life/core/data/dto/dto.dart';
 import 'package:pure_life/core/data/dto/product_response_dto.dart';
 import 'package:pure_life/core/data/purelife_repository.dart';
+import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/disposable_change_notifier.dart';
 import 'package:pure_life/core/utils/enums/category_enum.dart';
 import 'package:pure_life/core/utils/enums/price_range.dart';
@@ -23,14 +24,14 @@ class ShopScreenViewModel extends DisposableChangeNotifier {
   int currentPage = 0;
   final pageController = PageController(viewportFraction: 1);
   bool promoIsDisplayed = true;
-  void onPageChanged(BuildContext context, int index, CategoryEnum category) {
-    currentPage = index;
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Provider.of<ShopScreenViewModel>(context, listen: false)
-          .fetchProducts(category: category, offset: 10 * index);
-    });
-    notifyListeners();
-  }
+  // void onPageChanged(BuildContext context, int index, CategoryEnum category) {
+  //   currentPage = index;
+  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+  //     Provider.of<ShopScreenViewModel>(context, listen: false)
+  //         .fetchProducts(category: category, offset: 10 * index);
+  //   });
+  //   notifyListeners();
+  // }
 
   PriceRange? priceRange = PriceRange.below1;
   void onRadioChanged(PriceRange? value) {
@@ -69,8 +70,8 @@ class ShopScreenViewModel extends DisposableChangeNotifier {
 
   Future<void> getCategories() async {
     final response = await _repo.listProductCategories();
-    response.fold(
-        (left) => null, (right) => categories = List.from(right.categories));
+    response.fold((left) => showSnackBar(left.toString()),
+        (right) => categories = List.from(right.categories));
     notifyListeners();
   }
 
@@ -83,23 +84,25 @@ class ShopScreenViewModel extends DisposableChangeNotifier {
   }
 
   Future<void> fetchProducts(
-      {num? minPrice = 0,
+      {bool? isPublished = true,
+      num? minPrice = 0,
       num? maxPrice = 100000,
-      num? limit = 10,
+      num? limit = 1000,
       num? offset = 0,
       required CategoryEnum category}) async {
     //get the id of the category and pass as query param to fetchProducts
     getCategoryId(category);
 
     final response = await _repo.fetchProducts(
+        isPublished: isPublished,
         categoryId: categoryId,
         minPrice: minPrice,
         maxPrice: maxPrice,
         limit: limit,
         offset: offset);
 
-    response.fold(
-        (left) => null, (right) => productsList = List.from(right.products));
+    response.fold((left) => showSnackBar(left.toString()),
+        (right) => productsList = List.from(right.products));
     notifyListeners();
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -22,13 +22,13 @@ class BillingSummaryScreen extends StatefulWidget {
 
 class _BillingSummaryScreenState extends State<BillingSummaryScreen> {
   var publicKey = 'pk_test_81cfbf5ed6f6de61a2753c9d1a068ca769eb6ca3';
-  final plugin = PaystackPlugin();
+  // final plugin = PaystackPlugin();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    plugin.initialize(publicKey: publicKey);
+   // plugin.initialize(publicKey: publicKey);
   }
 
   @override
@@ -51,28 +51,28 @@ class _BillingSummaryScreenState extends State<BillingSummaryScreen> {
             BillingDetailsContainer(
                 name: value.fName.text,
                 email: value.email.text,
-                address: 'N/A',
-                phone: value.streetAddress.text),
+                address: value.streetAddress.text,
+                phone: value.phone.text),
             Constants.largeVerticalGutter.verticalSpace,
             OrderSummaryContainer(
               amount: value.getTotal(shopScreenViewModel),
               deliveryFee: 0.00,
               buttonTitle: Strings.placeOrder,
               action: () async {
-                value.initializeOrder();
+                value.placeOrder();
 
-                CheckoutResponse response = await plugin.checkout(
-                  context,
-                  method: CheckoutMethod
-                      .card, // Defaults to CheckoutMethod.selectable
-                  charge: value.charge,
-                );
-                if (response.message == 'Success') {
-                  value.clearCart();
-                  context.pop();
-                  context.pop();
-                  context.goNamed(AppPaths.homeScreenName);
-                }
+                // CheckoutResponse response = await plugin.checkout(
+                //   context,
+                //   method: CheckoutMethod
+                //       .card, // Defaults to CheckoutMethod.selectable
+                //   charge: value.charge,
+                // );
+                // if (response.message == 'Success') {
+                //   value.clearCart();
+                //   context.pop();
+                //   context.pop();
+                //   context.goNamed(AppPaths.homeScreenName);
+                // }
               },
             )
           ],

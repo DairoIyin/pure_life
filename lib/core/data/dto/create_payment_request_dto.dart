@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-final class CreatePaymentRequestDto extends Equatable {
-  
+final class CreateandInitiateRequestDto extends Equatable {
   final num partnerId;
   final num amount;
   final num currencyId;
@@ -9,19 +8,22 @@ final class CreatePaymentRequestDto extends Equatable {
   final num journalId;
   final num paymentMethodLineId;
   final String reference;
-  final num paymentTransactionId;
-  
 
-  CreatePaymentRequestDto({
+  final String email;
+  final num acquirerId;
+  final List<SalesIds> salesOrderIds;
+
+  CreateandInitiateRequestDto({
     required this.journalId,
     required this.partnerId,
     required this.reference,
     required this.amount,
     required this.currencyId,
     required this.paymentMethodLineId,
-    required this.paymentTransactionId,
-    required this.paymentType
-    ,
+    required this.acquirerId,
+    required this.email,
+    required this.salesOrderIds,
+    required this.paymentType,
   });
 
   Map<String, dynamic> toJson() => {
@@ -32,11 +34,12 @@ final class CreatePaymentRequestDto extends Equatable {
         'journalId': journalId,
         'paymentMethodLineId': paymentMethodLineId,
         'reference': reference,
-        'paymentTransactionId': paymentTransactionId
+        'email': email,
+        'acquirerId': acquirerId,
+        'salesOrderIds': salesOrderIds
       };
   @override
   List<Object?> get props => [
-        
         partnerId,
         amount,
         reference,
@@ -45,21 +48,38 @@ final class CreatePaymentRequestDto extends Equatable {
         paymentType,
         journalId,
         paymentMethodLineId,
-        paymentTransactionId
+        email,
+        acquirerId,
+        salesOrderIds
       ];
 }
 
+final class SalesIds extends Equatable {
+  final num id;
+  final num salesId;
 
+  SalesIds({
+    required this.id,
+    required this.salesId,
+  });
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'salesId': salesId,
+      };
 
-final class CreatePaymentResponseDto extends Equatable{
-    final num paymentId;
-  CreatePaymentResponseDto({required this.paymentId});
+  @override
+  List<Object?> get props => [id, salesId];
+}
+
+final class CreateandInitiateResponseDto extends Equatable {
+  final String paystackChechoutLink;
+  CreateandInitiateResponseDto({required this.paystackChechoutLink});
 
 //the json['result'] for this result is a num
-  factory CreatePaymentResponseDto.fromJson(dynamic json) {
-    return CreatePaymentResponseDto(paymentId: json);
+  factory CreateandInitiateResponseDto.fromJson(dynamic json) {
+    return CreateandInitiateResponseDto(paystackChechoutLink: json['data']['authorization_url']??'');
   }
 
-   List<Object?> get props => [paymentId];
+  List<Object?> get props => [paystackChechoutLink];
 }

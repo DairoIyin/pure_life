@@ -47,6 +47,7 @@ abstract final class Strings {
   static const country = "Country/Region";
   static const streetAddress = "Street Address";
   static const deliveryAddress = "Delivery Address";
+  static const city = "City";
   static const town = "Town/City";
   static const state = "State";
   static const phone = "Phone";
@@ -89,6 +90,7 @@ abstract final class Strings {
   static const createAccount = "Create Account";
   static const signIn = "Sign in";
   static const login = "Login";
+  static const loggingYouIn = "Signing You In...";
   static const enterPassword = "Enter Password";
   static const forgotPassword = "Forgot password?";
   static const signUpWithGoogle = "Sign In with Google";
@@ -222,6 +224,9 @@ abstract final class Strings {
   static const selectAnOption = "Select an option";
   static const houseNumberAndStreetName = "House number and street name";
   static const selectYourLocation = "Select your location and see the price";
+  static const selectYourCountry = "Select your country";
+  static const selectYourState = "Select your state";
+  static const selectYourCity = "Select your city";
   static const yourCart = "Your Cart";
   static const searchShopHealth = "Search shop health";
   static const searchShopSkincare= "Search shop skincare";

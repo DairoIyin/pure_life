@@ -5,6 +5,7 @@ import 'package:pure_life/core/routes/app_navigator.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/config.dart';
 import 'package:pure_life/features/auth/viewModels/forgot_pwd_screen_viewModel.dart';
 import 'package:pure_life/features/auth/viewModels/login_screen_viewModel.dart';
@@ -33,13 +34,16 @@ class PureLifeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => LoginScreenViewModel()),
-        ChangeNotifierProvider(create: (context) => SignupScreenViewModel()),
+        ChangeNotifierProvider(
+            create: (context) =>
+                LoginScreenViewModel(repo: getIt(), tokenRepository: getIt())),
+        ChangeNotifierProvider(
+            create: (context) => SignupScreenViewModel(getIt())),
         ChangeNotifierProvider(create: (context) => DashboardViewModel()),
         ChangeNotifierProvider(create: (context) => HomeScreenViewModel()),
         ChangeNotifierProvider(create: (context) => DrugRefillViewModel()),
         ChangeNotifierProvider(
-            create: (context) => CartScreenViewModel(getIt())),
+            create: (context) => CartScreenViewModel(repo:getIt(),tokenRepository:getIt())),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(
             create: (context) => ShopScreenViewModel(getIt())),
@@ -52,6 +56,7 @@ class PureLifeApp extends StatelessWidget {
           builder: (_, child) {
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
+              scaffoldMessengerKey: snackbarKey,
               title: 'Flutter Demo',
               theme: pureLifeTheme,
               routerConfig: CustomNavigationHelper.router,

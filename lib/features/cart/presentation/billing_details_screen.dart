@@ -6,11 +6,13 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:pure_life/core/constants.dart';
 import 'package:pure_life/core/data/dto/delivery_response_dto.dart';
+import 'package:pure_life/core/data/mock_delivery_data.dart';
 import 'package:pure_life/core/routes/path_names.dart';
 import 'package:pure_life/core/themes/themes.dart';
 import 'package:pure_life/core/ui_utils/extensions/delivery_name_extension.dart';
 import 'package:pure_life/core/ui_utils/ui_utils.dart';
 import 'package:pure_life/core/utils/utils.dart';
+import 'package:pure_life/features/auth/viewModels/signup_screen_view_model.dart';
 import 'package:pure_life/features/cart/viewmodel/cart_screen_view_model.dart';
 import 'package:pure_life/features/widgets/widgets.dart';
 
@@ -26,13 +28,14 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
   void initState() {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Provider.of<CartScreenViewModel>(context, listen: false)
-          .getDeliveryLocations();
+      Provider.of<CartScreenViewModel>(context, listen: false).getDeliveryLocations();
+      context.read<CartScreenViewModel>().getCountries();
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final signUpModel = context.read<SignupScreenViewModel>();
     return Consumer<CartScreenViewModel>(builder: (context, value, child) {
       String? _validateInput(Object? value) {
         if (value == null || value.toString().isEmpty) {
@@ -94,12 +97,44 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
                   ),
                 ],
               ),
-              BorderlessTextField(
-                controller: value.country,
+              //country dropdown
+              DropDownWrapper(
                 title: Strings.country,
-                errorString: value.errorText,
-                validator: _validateInput,
+                dropdown: DropdownButtonFormField(
+                  isExpanded: true,
+                  style: context.textTheme.labelMedium?.copyWith(
+                      fontSize: 11.sp, color: PureLifeColors.secondaryText),
+                  dropdownColor: Colors.white,
+                  menuMaxHeight: 300.h,
+                  value: value.selectedCountry,
+                  icon: SvgPicture.asset(AppIcons.arrow_downward,
+                      width: 7.w, height: 11.h),
+                  hint: Text(
+                    Strings.selectYourCountry,
+                    style:
+                        TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400),
+                  ),
+                  decoration: dropDownBorderlessDecoration(
+                    context,
+                  ),
+                  validator: _validateInput,
+                  items: value.countries
+                      .map<DropdownMenuItem<String>>(
+                        (item) => DropdownMenuItem<String>(
+                          value: item.name,
+                          child: Text(item.name),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (item) {
+                    value.selectedCountry = item ?? '';
+                    value.countryId = value.getLocationIdByName(
+                        value.countries, value.selectedCountry);
+                    value.getStates();
+                  },
+                ),
               ),
+              SizedBox(height: 16.16.h),
               BorderlessTextField(
                 controller: value.streetAddress,
                 title: Strings.streetAddress,
@@ -107,19 +142,16 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
                 errorString: value.errorText,
                 validator: _validateInput,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(Strings.deliveryAddress,
-                      style: context.textTheme.labelMedium),
-                  SizedBox(height: 11.84.h),
-                  DropdownButtonFormField(
+              //delivery address
+              DropDownWrapper(
+                  title: Strings.deliveryAddress,
+                  dropdown: DropdownButtonFormField(
                     isExpanded: true,
                     style: context.textTheme.labelMedium?.copyWith(
                         fontSize: 11.sp, color: PureLifeColors.secondaryText),
                     dropdownColor: Colors.white,
                     menuMaxHeight: 300.h,
-                    value: value.selectedDeliveryLocation,
+                    value: value.selectedDeliveryName,
                     icon: SvgPicture.asset(AppIcons.arrow_downward,
                         width: 7.w, height: 11.h),
                     hint: Text(
@@ -127,23 +159,26 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
                       style: TextStyle(
                           fontSize: 11.sp, fontWeight: FontWeight.w400),
                     ),
-                    decoration: dropDownDecoration(context,
-                        errorString: value.errorText),
+                    decoration: dropDownBorderlessDecoration(
+                      context,
+                    ),
                     validator: _validateInput,
                     items: value.deliveryItems
                         .map<DropdownMenuItem<String>>(
                           (item) => DropdownMenuItem<String>(
                             value: item.name,
-                            child: Text(item.name.trimDeliveryName),
+                            child: Text(item.name),
                           ),
                         )
                         .toList(),
-                    onChanged: (deliveryItem) {
-                      value.selectedDeliveryLocation = deliveryItem ?? '';
+                    onChanged: (item) {
+                      value.selectedDeliveryName = item ?? '';
+                      value.deliveryPrice = value.getPriceByName(
+                          value.deliveryItems, value.selectedDeliveryName);
+                     
                     },
-                  ),
-                ],
-              ),
+                  )),
+              const SizedBox(height: 16),
               BorderlessTextField(
                 controller: value.apartment,
                 title: Strings.deliveryAddress,
@@ -152,32 +187,82 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
                 validator: _validateInput,
                 showTitle: false,
               ),
-              BorderlessTextField(
-                controller: value.town,
-                title: Strings.town,
-                errorString: value.errorText,
-                validator: _validateInput,
-              ),
-              DropdownButtonFormField<Object>(
-                isExpanded: true,
-                style: context.textTheme.labelMedium?.copyWith(
-                    fontSize: 11.sp, color: PureLifeColors.secondaryText),
-                dropdownColor: Colors.white,
-                menuMaxHeight: 300.h,
-                value: value.selectedState,
-                icon: SvgPicture.asset(AppIcons.arrow_downward,
-                    width: 7.w, height: 11.h),
-                hint: Text(
-                  Strings.selectYourLocation,
-                  style:
-                      TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400),
+              //state dropdown
+              DropDownWrapper(
+                title: Strings.state,
+                dropdown: DropdownButtonFormField(
+                  isExpanded: true,
+                  style: context.textTheme.labelMedium?.copyWith(
+                      fontSize: 11.sp, color: PureLifeColors.secondaryText),
+                  dropdownColor: Colors.white,
+                  menuMaxHeight: 300.h,
+                  value: value.selectedState,
+                  icon: SvgPicture.asset(AppIcons.arrow_downward,
+                      width: 7.w, height: 11.h),
+                  hint: Text(
+                    Strings.selectYourState,
+                    style:
+                        TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400),
+                  ),
+                  decoration: dropDownBorderlessDecoration(
+                    context,
+                  ),
+                  validator: _validateInput,
+                  items: value.states
+                      .map<DropdownMenuItem<String>>(
+                        (item) => DropdownMenuItem<String>(
+                          value: item.name,
+                          child: Text(item.name),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (item) {
+                    value.selectedState = item ?? '';
+                    value.stateId = value.getLocationIdByName(
+                        value.states, value.selectedState);
+                    value.getCities();
+                  },
                 ),
-                decoration:
-                    dropDownDecoration(context, errorString: value.errorText),
-                validator: _validateInput,
-                items: [],
-                onChanged: (val) {},
               ),
+              SizedBox(height: 16.16.h),
+              //city dropdown
+              DropDownWrapper(
+                title: Strings.city,
+                dropdown: DropdownButtonFormField(
+                  isExpanded: true,
+                  style: context.textTheme.labelMedium?.copyWith(
+                      fontSize: 11.sp, color: PureLifeColors.secondaryText),
+                  dropdownColor: Colors.white,
+                  menuMaxHeight: 300.h,
+                  value: value.selectedArea,
+                  icon: SvgPicture.asset(AppIcons.arrow_downward,
+                      width: 7.w, height: 11.h),
+                  hint: Text(
+                    Strings.selectYourCity,
+                    style:
+                        TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w400),
+                  ),
+                  decoration: dropDownBorderlessDecoration(
+                    context,
+                  ),
+                  validator: _validateInput,
+                  items: value.areas
+                      .map<DropdownMenuItem<String>>(
+                        (item) => DropdownMenuItem<String>(
+                          value: item.name,
+                          child: Text(item.name),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (item) {
+                    value.selectedArea = item ?? '';
+                    value.cityId = value.getLocationIdByName(
+                        value.areas, value.selectedArea);
+                  },
+                ),
+              ),
+              SizedBox(height: 16.16.h),
+              SizedBox(height: 16.h),
               BorderlessTextField(
                 controller: value.phone,
                 title: Strings.phone,
@@ -192,8 +277,7 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
               ),
               PureLifeButton(
                   onPressed: () {
-                    
-                   // if (value.fbKey.currentState!.validate()) {}
+                    // if (value.fbKey.currentState!.validate()) {}
                     context.pushNamed(AppPaths.billingSummaryName);
                   },
                   title: Strings.saveChanges),
@@ -202,5 +286,23 @@ class _BillingDetailsScreenState extends State<BillingDetailsScreen> {
         ),
       );
     });
+  }
+}
+
+class DropDownWrapper extends StatelessWidget {
+  const DropDownWrapper(
+      {super.key, required this.title, required this.dropdown});
+  final String title;
+  final Widget dropdown;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: context.textTheme.labelMedium),
+        SizedBox(height: 11.84.h),
+        dropdown
+      ],
+    );
   }
 }

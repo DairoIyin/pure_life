@@ -47,8 +47,8 @@ class _ShopItemContainerState extends State<ShopItemContainer> {
                     border:
                         Border.all(color: PureLifeColors.onPrimary, width: 2),
                     image: DecorationImage(
-                        image:
-                            MemoryImage(widget.product.imageInBinary.toBytes),
+                        image: MemoryImage(
+                            widget.product.imageInBinary.toString().toBytes),
                         fit: BoxFit.cover)),
               ),
             ),

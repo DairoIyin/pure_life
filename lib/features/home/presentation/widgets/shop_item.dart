@@ -46,7 +46,7 @@ class _ShopItemState extends State<ShopItem> {
                   decoration: BoxDecoration(
                       borderRadius: ContainerProperties.defaultBorderRadius,
                       image: DecorationImage(
-                          image: MemoryImage(widget.product.imageInBinary.toBytes), fit: BoxFit.cover)),
+                          image: MemoryImage(widget.product.imageInBinary.toString().toBytes), fit: BoxFit.cover)),
                 ),
               ),
             ),

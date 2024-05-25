@@ -22,17 +22,19 @@ final class ProductItem extends Equatable {
   final num id;
   final String name;
   final num price;
-  final String imageInBinary;
+  final dynamic imageInBinary;
   num quantity;
 
-  ProductItem({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.imageInBinary,
-    this.quantity=1
-  });
+  ProductItem(
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.imageInBinary,
+      this.quantity = 1});
 
+  factory ProductItem.empty() {
+    return ProductItem(id: 0, name: '', price: 0, imageInBinary: '');
+  }
   factory ProductItem.fromJson(Map<String, dynamic> json) {
     return ProductItem(
       id: json['id'] ?? 0,

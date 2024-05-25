@@ -66,38 +66,38 @@ class _ShopAndOrderScreenState extends State<ShopAndOrderScreen> {
                   product: product,
                 );
               }),
-          Constants.largeVerticalGutter.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Spacer(),
-              Expanded(
-                child: NumberPaginator(
-                  numberPages: value.noOfPages,
-                  onPageChange: (index) {
-                    _scrollController.animateTo(0,
-                        duration: Duration(milliseconds: 600),
-                        curve: Curves.linear);
-                    value.onPageChanged(context, index, CategoryEnum.all);
-                  },
-                  showNextButton: false,
-                  showPrevButton: false,
-                  config: const NumberPaginatorUIConfig(
-                    height: 25,
+          // Constants.largeVerticalGutter.verticalSpace,
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Spacer(),
+          //     Expanded(
+          //       child: NumberPaginator(
+          //         numberPages: value.noOfPages,
+          //         onPageChange: (index) {
+          //           _scrollController.animateTo(0,
+          //               duration: Duration(milliseconds: 600),
+          //               curve: Curves.linear);
+          //           value.onPageChanged(context, index, CategoryEnum.all);
+          //         },
+          //         showNextButton: false,
+          //         showPrevButton: false,
+          //         config: const NumberPaginatorUIConfig(
+          //           height: 25,
 
-                    // default height is 48
-                    contentPadding: EdgeInsets.zero,
-                    buttonPadding: EdgeInsets.zero,
-                    buttonSelectedForegroundColor: PureLifeColors.onPrimary,
-                    buttonUnselectedForegroundColor: PureLifeColors.primaryText,
-                    buttonUnselectedBackgroundColor: PureLifeColors.onPrimary,
-                    buttonSelectedBackgroundColor: PureLifeColors.primary,
-                  ),
-                ),
-              ),
-              Spacer(),
-            ],
-          )
+          //           // default height is 48
+          //           contentPadding: EdgeInsets.zero,
+          //           buttonPadding: EdgeInsets.zero,
+          //           buttonSelectedForegroundColor: PureLifeColors.onPrimary,
+          //           buttonUnselectedForegroundColor: PureLifeColors.primaryText,
+          //           buttonUnselectedBackgroundColor: PureLifeColors.onPrimary,
+          //           buttonSelectedBackgroundColor: PureLifeColors.primary,
+          //         ),
+          //       ),
+          //     ),
+          //     Spacer(),
+          //   ],
+          // )
         ],
       ));
     });

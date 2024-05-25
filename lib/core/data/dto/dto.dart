@@ -8,3 +8,6 @@ export 'read_sale_response_dto.dart';
 export 'initiate_paystack_request_dto.dart';
 export 'create_payment_request_dto.dart';
 export 'validate_payment_request_dto.dart';
+export 'login_dto.dart';
+export 'location_response_dto.dart';
+export 'user_partner_response_dto.dart';
